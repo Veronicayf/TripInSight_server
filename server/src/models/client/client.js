@@ -24,11 +24,10 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING, //tipo URL buscar
             allowNull: true,
         },
-        birthDate: {
-            type: DataTypes.STRING, //formato fecha dd/mm/yyyy
+        birthdate: {
+            type: DataTypes.DATE, //formato fecha dd/mm/yyyy
             allowNull: false
         },
-        //A CONVERSAR
         email: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -40,6 +39,7 @@ module.exports = (sequelize) => {
         phoneNumber: {
             type: DataTypes.NUMBER,
             allowNull: false,
-        }
+        },
+
     }, { timestamps: false });
 }

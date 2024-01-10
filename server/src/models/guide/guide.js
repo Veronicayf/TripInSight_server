@@ -24,7 +24,7 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: true,
         },
-        birthDate: {
+        birthdate: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -32,5 +32,9 @@ module.exports = (sequelize) => {
             type: DataTypes.TEXT,
             allowNull: false
         },
+        tour: {
+            //como lo tendria que agregar??
+            //es una tabla intermedia
+        }
     }, { timestamps: false });
 }

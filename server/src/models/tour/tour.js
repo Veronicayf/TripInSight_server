@@ -21,10 +21,10 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         image: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING, //buscar para url
             allowNull: true,
         },
-        coutry: {
+        country: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -52,10 +52,6 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        image: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
         price: {
             type: DataTypes.NUMBER,
             allowNull: false
@@ -63,6 +59,10 @@ module.exports = (sequelize) => {
         equipment: {
             type: DataTypes.TEXT,
             allowNull: false
+        },
+        guide: {
+            //como se podria agregar si es una clave forania
+            //es una tabla intermedia
         }
     }, { timestamps: false });
 }
