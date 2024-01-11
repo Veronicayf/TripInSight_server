@@ -8,12 +8,12 @@ module.exports = (sequelize) => {
             allowNull: false,
             defaultValue: DataTypes.UUIDV4
         },
-        name: {
+        nameTour: {
             type: DataTypes.STRING,
             allowNull: false,
         },
         initialDate: {
-            type: DataTypes.DATE,   
+            type: DataTypes.DATE,
             allowNull: false,
         },
         endDate: {
@@ -24,7 +24,7 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: true,
         },
-        coutry: {
+        country: {
             type: DataTypes.STRING,
             allowNull: false
         },
@@ -37,7 +37,7 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         capacity: {
-            type: DataTypes.INTEGER, 
+            type: DataTypes.INTEGER,
             allowNull: false
         },
         description: {
@@ -52,12 +52,8 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        image: {
-            type: DataTypes.STRING,
-            allowNull: false
-        },
         price: {
-            type: DataTypes.INTEGER, 
+            type: DataTypes.INTEGER,
             allowNull: false
         },
         equipment: {

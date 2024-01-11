@@ -1,3 +1,4 @@
+
 const { user } = require('../../sync/dbConnection');
 
 const postUser = async (  name, lastname, email, birthdate, nationality, phone ) =>{
@@ -21,6 +22,7 @@ const postUser = async (  name, lastname, email, birthdate, nationality, phone )
     }
        
     return newUser;
+
   } catch (error) {
 
     console.log(error, 'linea 27');
