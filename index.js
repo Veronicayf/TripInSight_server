@@ -1,6 +1,9 @@
 const express = require('express');
 require('dotenv').config();
-const { sequelize } = require('./server/src/sync/dbConnection');
+
+const { conn } = require('./server/src/sync/dbConnection');
+
+
 
 // Crear el servidor de express
 const app = express();
@@ -9,11 +12,17 @@ const app = express();
 app.use( express.json() );
 
 // Rutas
-app.get('/', async(req, res) => {
-    
-});
+// app.get('/', async(req, res) => {
+//     console.log(conn, 'linea 14');    
+//     // console.log(sequelize, 'linea 20');
+//     res.json({
+//         msg: 'hola'
+//     })
+// });
+conn.sync({ force: true }).then(() => {  
 
-// Escuchar peticiones
-app.listen(process.env.PORT, () => {
-    console.log(`Server running on Port: ${ process.env.PORT }` );
-});
+    app.listen(process.env.PORT, () => {
+        console.log(`Sevidor corriendo en puerto: ${ process.env.PORT }` );        
+    });   
+});  
+

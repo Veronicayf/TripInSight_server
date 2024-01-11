@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         initialDate: {
-            type: DataTypes.DATE,
+            type: DataTypes.DATE,   
             allowNull: false,
         },
         endDate: {
@@ -37,11 +37,11 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         capacity: {
-            type: DataTypes.NUMBER,
+            type: DataTypes.INTEGER, 
             allowNull: false
         },
         description: {
-            type: DataTypes.TEXT,
+            type: DataTypes.TEXT, //ANTES TEXT
             allowNull: false
         },
         season: {
@@ -57,12 +57,13 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         price: {
-            type: DataTypes.NUMBER,
+            type: DataTypes.INTEGER, 
             allowNull: false
         },
         equipment: {
-            type: DataTypes.TEXT,
+            type: DataTypes.TEXT, //ANTES TEXT
             allowNull: false
-        }
+        },
+        //Agregar rating- 1...5
     }, { timestamps: false });
 }
