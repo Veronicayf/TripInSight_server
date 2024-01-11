@@ -1,6 +1,6 @@
 const { deleteHandler } = require('../../controllers/admin/admin.deleteController')
 
-const deleteHandlerHandler = async (req, res) => {
+const deleteAdminHandler = async (req, res) => {
 
     const { id } = req.params
 
@@ -17,5 +17,5 @@ const deleteHandlerHandler = async (req, res) => {
 
 
 module.exports = {
-    deleteHandlerHandler,
+    deleteAdminHandler,
 }

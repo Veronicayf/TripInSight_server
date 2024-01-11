@@ -1,7 +1,7 @@
 const express = require('express')
-const mainRouter = require('./routes/mainRouter')
+const mainRouter = require('./routes/main.Router/main.Router')
 const morgan = require('morgan')
-const cors = require('cors')
+const cors = require('cors');
 
 const server = express(); 
 
@@ -20,7 +20,7 @@ server.use((req, res, next) =>{
     next()
 })
 
-server.use(express.json())
-server.use(mainRouter)
+server.use(mainRouter);
+server.use(express.json());
 
 module.exports = server; 
