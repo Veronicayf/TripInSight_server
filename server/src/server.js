@@ -1,7 +1,7 @@
 const express = require('express')
 const mainRouter = require('./routes/main.Router/main.Router')
 const morgan = require('morgan')
-const cors = require('cors')
+const cors = require('cors');
 
 const server = express();
 

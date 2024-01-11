@@ -2,6 +2,8 @@ const { getUser } = require('../../controllers/User/user.getController')
 
 const getUserHandler = async (req, res) => {
 
+    console.log('se llamo este handler');
+    
     const { id } = req.params
 
     try {
