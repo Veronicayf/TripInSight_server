@@ -15,9 +15,10 @@ const guide_toursModel = require('../models/guideTours/guideTours.model');
 // });
 
 //? Para uso de mi base de datos local
-const sequelize = new Sequelize('tripinsight', 'root', 'Linkjunior9330', {
+const sequelize = new Sequelize('tripinsight', 'root', 'hola1234', {
     host: 'localhost',
-    dialect: 'mysql'     
+    dialect: 'mysql',
+    logging: false
 });
 
 guideModel(sequelize);
@@ -32,7 +33,7 @@ guide_toursModel(sequelize);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring.
-const {user, guide, tour, favorites_tours, client_purchased, guide_tours} = sequelize.models;
+const { user, guide, tour, favorites_tours, client_purchased, guide_tours } = sequelize.models;
 
 favorites_tours.hasMany(user, {
     foreignKey: 'favorites_tours'
@@ -45,15 +46,15 @@ client_purchased.hasMany(user, {
 guide_tours.hasMany(guide, {
     foreignKey: 'guide_tours'
 })
-       
+
 module.exports = {
     ...sequelize.model,
-    conn: sequelize, 
-    user, 
+    conn: sequelize,
+    user,
     guide,
     tour,
     favorites_tours,
     client_purchased,
-    guide_tours    
+    guide_tours
 };
 
