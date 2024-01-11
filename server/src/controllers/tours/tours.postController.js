@@ -7,7 +7,8 @@ const postTours = async (tourData) => {
     return newTour;
 
   } catch (error) {
-    throw new Error(`Error creating tour: ${error.message}`)
+
+    console.log('controller error', error)
   }
 }
 
