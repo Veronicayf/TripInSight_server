@@ -1,6 +1,6 @@
 const express = require('express');
 require('dotenv').config();
-const { sequelize } = require('./db/dbConnection');
+const { sequelize } = require('./server/src/sync/dbConnection');
 
 // Crear el servidor de express
 const app = express();
@@ -15,5 +15,5 @@ app.get('/', async(req, res) => {
 
 // Escuchar peticiones
 app.listen(process.env.PORT, () => {
-    console.log(`Sevidor corriendo en puerto: ${ process.env.PORT }` );
+    console.log(`Server running on Port: ${ process.env.PORT }` );
 });

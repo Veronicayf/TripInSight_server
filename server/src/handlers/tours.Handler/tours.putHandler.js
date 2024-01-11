@@ -1,11 +1,11 @@
-const { postUser } = require('../../controllers/User/postUser')
+const { putTours } = require('../../controllers/tours/tours.putController')
 
-const postUserHandler = async (req, res) => {
+const putToursHandler = async (req, res) => {
 
     const { name, lastname, email, birthdate, nationality, phone } = req.body
 
     try {
-        const user = await postUser( name, lastname, email, birthdate, nationality, phone )
+        const user = await putTours( name, lastname, email, birthdate, nationality, phone )
 
         res.status(200).json(user)
         
@@ -16,5 +16,5 @@ const postUserHandler = async (req, res) => {
 
 
 module.exports = {
-    postUserHandler,
+    putToursHandler,
 }

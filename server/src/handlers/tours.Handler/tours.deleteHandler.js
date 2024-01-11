@@ -1,6 +1,6 @@
-const { getUser } = require('../../controllers/User/getUser')
+const { deleteTours } = require('../../controllers/tours/tours.deleteController')
 
-const getUserHandler = async (req, res) => {
+const deleteToursHandler = async (req, res) => {
 
     const { id } = req.params
 
@@ -17,5 +17,5 @@ const getUserHandler = async (req, res) => {
 
 
 module.exports = {
-    getUserHandler,
+    deleteToursHandler,
 }
