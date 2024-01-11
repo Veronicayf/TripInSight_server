@@ -12,15 +12,15 @@ const { deleteToursHandler } = require('../../handlers/tours.Handler/tours.delet
 
 const toursRouter = Router()
 
-userRouter.post("/", postToursHandler)
-userRouter.get("/", getToursHandler)
-// userRouter.get("/", getToursByNameHandler)
-// userRouter.get("/", getToursByTypeHandler)
-// userRouter.get("/", getToursByPriceHandler)
-// userRouter.get("/", getToursByCountryHandler)
-// userRouter.get("/", getToursByGuideHandler)
-userRouter.put("/", putToursHandler)
-userRouter.delete("/:id", deleteToursHandler)
+toursRouter.post("/", postToursHandler)
+toursRouter.get("/", getToursHandler)
+// toursRouter.get("/", getToursByNameHandler)
+// toursRouter.get("/", getToursByTypeHandler)
+// toursRouter.get("/", getToursByPriceHandler)
+// toursRouter.get("/", getToursByCountryHandler)
+// toursRouter.get("/", getToursByGuideHandler)
+toursRouter.put("/", putToursHandler)
+toursRouter.delete("/:id", deleteToursHandler)
 
 
 module.exports = toursRouter

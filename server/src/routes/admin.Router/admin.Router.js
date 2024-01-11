@@ -8,9 +8,9 @@ const { deleteAdminHandler } = require('../../handlers/admin.Handler/admin.delet
 const adminRouter = Router()
 
 adminRouter.post("/", postAdminHandler)
-adminRouter.get("/", getAdminHandler)
 adminRouter.put("/", putAdminHandler)
-adminRouter.delete("/:id", deleteAdminHandler)
+adminRouter.get("/", getAdminHandler)
+adminRouter.delete("/",deleteAdminHandler)
 
 
 module.exports = adminRouter

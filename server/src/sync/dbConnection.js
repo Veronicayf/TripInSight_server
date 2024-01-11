@@ -15,9 +15,10 @@ const guide_toursModel = require('../models/guideTours/guideTours.model');
 // });
 
 //? Para uso de mi base de datos local
-const sequelize = new Sequelize('tripinsight', 'root', 'Linkjunior9330', {
+const sequelize = new Sequelize('tripinsight', 'root', '1234', {
     host: 'localhost',
-    dialect: 'mysql'     
+    dialect: 'mysql', 
+    logging:false    
 });
 
 guideModel(sequelize);

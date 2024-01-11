@@ -1,11 +1,11 @@
-const { deleteHandler } = require('../../controllers/admin/admin.deleteController')
+const { getGuide } = require('../../controllers/guide/guide.getController')
 
-const deleteAdminHandler = async (req, res) => {
+const getGuideHandler = async (req, res) => {
 
     const { id } = req.params
 
     try {
-        const user = await getUser( id )
+        const user = await getGuide( id )
         if(!id) throw Error (`The user with the id : ${idPais} does not exist`)
 
         res.status(200).json(user)
@@ -17,5 +17,5 @@ const deleteAdminHandler = async (req, res) => {
 
 
 module.exports = {
-    deleteAdminHandler,
+    getGuideHandler,
 }
