@@ -1,6 +1,8 @@
 const express = require('express');
 require('dotenv').config();
+
 const { conn } = require('./server/src/sync/dbConnection');
+
 
 
 // Crear el servidor de express
@@ -22,5 +24,5 @@ conn.sync({ force: true }).then(() => {
     app.listen(process.env.PORT, () => {
         console.log(`Sevidor corriendo en puerto: ${ process.env.PORT }` );        
     });   
-
 });  
+

@@ -17,3 +17,5 @@ try {
   }
   
 }
+
+module.exports={postUser}
