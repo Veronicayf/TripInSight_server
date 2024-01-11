@@ -2,15 +2,21 @@ const { postTours } = require('../../controllers/tours/tours.postController')
 
 const postToursHandler = async (req, res) => {
 
-    const { name, lastname, email, birthdate, nationality, phone } = req.body
+    const tourData = req.body;
 
     try {
-        const user = await postTours( name, lastname, email, birthdate, nationality, phone )
+        const reqData = { id, nameTour, initialDate, endDate, image, country, city, type, capacity, description, season, price, equipment };
+        const missingData = reqData.filter(search => !(search in tourData));
 
-        res.status(200).json(user)
-        
+        if (missingData.length > 0) {
+            return res.status(400).json({ error: `missing required fields: ${missingData.join(', ')}` });
+        }
+
+        const newTour = await postTours(tourData);
+        res.status(200).json(newTour)
+
     } catch (error) {
-        res.status(404).json({error: error.message})
+        res.status(500).json('llega hasta aqui', error)
     }
 }
 

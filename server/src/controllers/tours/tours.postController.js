@@ -1,18 +1,14 @@
-const postTours = async (id) =>{
+const { tour } = require('../../sync/dbConnection')
 
-    try {
-    
-        if (id) {
-          
-          }
-          throw Error ('invalid data')
-    
-      } catch (error) {
-    
-        throw error('insufficient data')
-        
-      }
-      
-    }
+const postTours = async (tourData) => {
 
-    module.exports = {postTours}
+  try {
+    const newTour = await tour.create(tourData);
+    return newTour;
+
+  } catch (error) {
+    throw new Error(`Error creating tour: ${error.message}`)
+  }
+}
+
+module.exports = { postTours }
