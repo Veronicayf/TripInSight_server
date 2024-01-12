@@ -16,14 +16,25 @@ const postGuideHandler = async (req, res) => {
         }
         
         const guide = await postGuide( forename, surname, nationality, image, birthDate, biography )
+        if(!guide) throw Error (`The guide with the id : ${id} does not exist`)
         
         res.status(200).json(guide)
         
     } catch (error) {
-        res.status(404).json({error: error.message})
+        res.status(404).json({
+            ok: false,
+            errors: {
+                id: {
+                     type: "field",
+                     value: id,
+                     msg: error.message,
+                     path: "id",
+                     location: "params"
+                    }
+                }
+            })
+        }
     }
-}
-
 
 module.exports = {
     postGuideHandler,
