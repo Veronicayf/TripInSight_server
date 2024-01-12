@@ -1,18 +1,11 @@
-const getUser = async (id) =>{
+const { user } = require("../../sync/dbConnection")
 
-    try {
-    
-        if (id) {
+const getUserById = async (id) =>{
           
-          }
-          throw Error ('invalid data')
-    
-      } catch (error) {
-    
-        throw error('insufficient data')
-        
-      }
-      
-    }
+  const foundUser = await user.findByPk(id);        
+          
+  return foundUser;      
+  
+}
 
-    module.exports={getUser}
+module.exports={getUserById}

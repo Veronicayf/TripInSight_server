@@ -1,34 +1,33 @@
 
 const { user } = require('../../sync/dbConnection');
 
-const postUser = async (  name, lastname, email, birthdate, nationality, phone ) =>{
+const postUser = async (  forename, surname, nationality, image, birthDate, email, password, phoneNumber  ) =>{
 
   try {
     
-    if (name && lastname && email && birthdate && nationality && phone) {
+    if (forename && surname && nationality && image && birthDate && email && password && phoneNumber) {
             
       const newUser = await user.create({
-        forename: name,
-        surname: lastname,
+        forename,
+        surname,
         nationality,
-        birthDate: birthdate,
+        image,
+        birthDate,
         email,
-        password: '12345',
-        phoneNumber: phone,
+        password,
+        phoneNumber,
       });
-
-      console.log(newUser.dataValues);
-      return newUser.dataValues;  
+      
+      return newUser;  
     }
        
     return newUser;
 
   } catch (error) {
-
-    console.log(error, 'linea 27');
-    return error;       
+    
+    throw error;      
   }
   
-}
+}       
 
 module.exports = { postUser }
