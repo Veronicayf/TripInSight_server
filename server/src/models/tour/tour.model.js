@@ -9,15 +9,15 @@ module.exports = (sequelize) => {
             defaultValue: DataTypes.UUIDV4
         },
         nameTour: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(5),
             allowNull: false,
         },
         initialDate: {
-            type: DataTypes.DATEONLY,
+            type: DataTypes.DATE,
             allowNull: false,
         },
         endDate: {
-            type: DataTypes.DATEONLY,
+            type: DataTypes.DATE,
             allowNull: false
         },
         image: {
@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
             allowNull: true,
         },
         country: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(5),
             allowNull: false
         },
         city: {
