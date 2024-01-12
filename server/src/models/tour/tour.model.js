@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
             defaultValue: DataTypes.UUIDV4
         },
         nameTour: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(5),
             allowNull: false,
         },
         initialDate: {
@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
             allowNull: true,
         },
         country: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(5),
             allowNull: false
         },
         city: {
