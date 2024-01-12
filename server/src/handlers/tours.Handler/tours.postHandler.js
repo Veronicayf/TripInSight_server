@@ -1,4 +1,3 @@
-const { error } = require('console');
 const { postTours } = require('../../controllers/tours/tours.postController');
 const { validationResult } = require('express-validator')
 
