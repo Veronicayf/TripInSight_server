@@ -3,9 +3,11 @@ const server = require('./server/src/server')
 const { conn } = require('./server/src/sync/dbConnection');
 require('dotenv').config();
 
+const PORT = 4000  
+
 conn.sync({ force: true }).then(() => {  
 
-    server.listen(process.env.PORT, () => {
-        console.log(`Sevidor corriendo en puerto: ${ process.env.PORT }` );        
+    server.listen(PORT, () => {
+        console.log(`Sevidor corriendo en puerto: ${ PORT }` );        
     });   
 }); 
