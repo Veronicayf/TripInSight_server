@@ -1,9 +1,9 @@
-const { postGuide } = require('../../controllers/guide/guide.postController')
+const { getGuide } = require('../../controllers/guide/guide.getController')
 const { validationResult } = require('express-validator')
 
-const postGuideHandler = async (req, res) => {
+const getGuideHandler = async (req, res) => {
 
-    const { forename, surname, nationality, image, birthDate, biography } = req.body
+    const { id } = req.params
 
     try {
 
@@ -14,9 +14,10 @@ const postGuideHandler = async (req, res) => {
                 errors: errors.mapped()
             })
         }
-        
-        const guide = await postGuide( forename, surname, nationality, image, birthDate, biography )
-        
+
+        const guide = await getGuide( id )
+        if(!id) throw Error (`The guide with the id : ${idPais} does not exist`)
+
         res.status(200).json(guide)
         
     } catch (error) {
@@ -26,5 +27,5 @@ const postGuideHandler = async (req, res) => {
 
 
 module.exports = {
-    postGuideHandler,
+    getGuideHandler,
 }
