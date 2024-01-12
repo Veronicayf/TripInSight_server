@@ -1,5 +1,6 @@
 const { Router } = require('express')
 const { postToursHandler } = require('../../handlers/tours.Handler/tours.postHandler')
+const { check } = require('express-validator')
 
 const { getToursHandler } = require('../../handlers/tours.Handler/tours.getHandler')
 // const { getToursByNameHandler } = require()
@@ -14,7 +15,12 @@ const { deleteToursHandler } = require('../../handlers/tours.Handler/tours.delet
 
 const toursRouter = Router()
 
-toursRouter.post("/", postToursHandler)
+toursRouter.post("/", [
+    check('nameTour', 'nombre no valido').not().isEmpty().isString(),
+],
+    postToursHandler)
+
+
 toursRouter.get("/", getToursHandler)
 // toursRouter.get("/", getToursByNameHandler)
 // toursRouter.get("/", getToursByTypeHandler)
