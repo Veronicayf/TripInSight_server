@@ -1,13 +1,23 @@
 const { postGuide } = require('../../controllers/guide/guide.postController')
+const { validationResult } = require('express-validator')
 
 const postGuideHandler = async (req, res) => {
 
-    const { forename, surname, nationality, image, birthdate, biography } = req.body
+    const { forename, surname, nationality, image, birthDate, biography } = req.body
 
     try {
-        const guide = await postGuide( forename, surname, nationality, image, birthdate, biography )
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({
+                of: false,
+                errors: errors.mapped()
+            })
+        }
         
-        res.status(200).json(user)
+        const guide = await postGuide( forename, surname, nationality, image, birthDate, biography )
+        
+        res.status(200).json(guide)
         
     } catch (error) {
         res.status(404).json({error: error.message})
