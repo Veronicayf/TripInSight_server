@@ -1,17 +1,17 @@
 const { guide } = require('../../sync/dbConnection')
 
 
-const postGuide = async (  forename, surname, nationality, image, birthdate,  biography ) =>{
+const postGuide = async (  forename, surname, nationality, image, birthDate, biography ) =>{
 
 try {
 
-    if ( forename, surname, nationality, image, birthdate, biography ) {
+    if ( forename, surname, nationality, image, birthDate, biography ) {
       const newGuide = await guide.create({
             forename,
             surname,
             nationality,
             image,
-            birthdate,
+            birthDate,
             biography
             })
 
