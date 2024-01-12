@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
             defaultValue: DataTypes.UUIDV4
         },
         nameTour: {
-            type: DataTypes.STRING(5),
+            type: DataTypes.STRING,
             allowNull: false,
         },
         initialDate: {
@@ -25,7 +25,7 @@ module.exports = (sequelize) => {
             allowNull: true,
         },
         country: {
-            type: DataTypes.STRING(5),
+            type: DataTypes.STRING,
             allowNull: false
         },
         city: {
@@ -41,7 +41,7 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         description: {
-            type: DataTypes.TEXT, //ANTES TEXT
+            type: DataTypes.TEXT,
             allowNull: false
         },
         season: {
@@ -57,7 +57,7 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         equipment: {
-            type: DataTypes.TEXT, //ANTES TEXT
+            type: DataTypes.TEXT,
             allowNull: false
         },
         //Agregar rating- 1...5
