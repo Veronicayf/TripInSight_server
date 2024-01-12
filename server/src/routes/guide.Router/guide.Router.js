@@ -20,7 +20,7 @@ guideRouter.post("/",
        ],
            postGuideHandler)
 guideRouter.put("/", putGuideHandler)
-guideRouter.get("/", getGuideHandler)
+guideRouter.get("/:id", getGuideHandler)
 guideRouter.delete("/:id", deleteGuideHandler)
 
 
