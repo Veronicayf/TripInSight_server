@@ -5,7 +5,7 @@ require('dotenv').config();
 
 const PORT = 4000  
 
-conn.sync({ force: true }).then(() => {  
+conn.sync({ force: false }).then(() => {  
 
     server.listen(PORT, () => {
         console.log(`Sevidor corriendo en puerto: ${ PORT }` );        
