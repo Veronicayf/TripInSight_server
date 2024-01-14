@@ -16,4 +16,15 @@ const getGuide = async ( id ) =>{
     }
 }
 
-module.exports={ getGuide }
+const getAllGuides = async (req, res) => {
+
+    try {
+      const allGuides = await guide.findAll();
+      return allGuides;
+    } catch (error) {
+      console.log('controller error', error)
+    }
+  
+  }
+
+module.exports={ getGuide, getAllGuides }

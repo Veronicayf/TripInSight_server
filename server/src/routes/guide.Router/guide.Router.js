@@ -3,7 +3,7 @@ const { check } = require('express-validator')
 
 const { postGuideHandler } = require('../../handlers/guide.Handler/guide.postHandler')
 const { putGuideHandler } = require('../../handlers/guide.Handler/guide.putHandler')
-const { getGuideHandler } = require('../../handlers/guide.Handler/guide.getHandler')
+const { getGuideHandler, getAllGuidesHandler } = require('../../handlers/guide.Handler/guide.getHandler')
 const { deleteGuideHandler } = require('../../handlers/guide.Handler/guide.deleteHandler')
 
 const guideRouter = Router()
@@ -25,7 +25,7 @@ guideRouter.get("/:id",
       check('id', 'invalid id format').not().isEmpty().isUUID()
      ],
 getGuideHandler)
+guideRouter.get("/", getAllGuidesHandler)
 /guideRouter.delete("/:id", deleteGuideHandler)
-
 
 module.exports = guideRouter

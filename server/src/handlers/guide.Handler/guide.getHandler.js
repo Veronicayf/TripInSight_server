@@ -1,4 +1,4 @@
-const { getGuide } = require('../../controllers/guide/guide.getController')
+const { getGuide, getAllGuides } = require('../../controllers/guide/guide.getController')
 const { validationResult } = require('express-validator')
 
 const getGuideHandler = async (req, res) => {
@@ -25,7 +25,16 @@ const getGuideHandler = async (req, res) => {
     }
 }
 
+const getAllGuidesHandler = async (req, res) => {
+    try {
+        const allGuides = await getAllGuides();
+        res.status(200).json(allGuides)
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
+}
 
 module.exports = {
     getGuideHandler,
+    getAllGuidesHandler
 }
