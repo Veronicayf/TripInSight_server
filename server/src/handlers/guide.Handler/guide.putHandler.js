@@ -6,7 +6,7 @@ const putGuideHandler = async (req, res) => {
 
     try {
         const user = await putGuide( id )
-        if(!id) throw Error (`The user with the id : ${idPais} does not exist`)
+        if(!id) throw Error (`The user with the id : ${id} does not exist`)
 
         res.status(200).json(user)
         
