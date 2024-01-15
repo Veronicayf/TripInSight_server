@@ -1,18 +1,29 @@
-const getTours = async (id) =>{
+const { tour } = require('../../sync/dbConnection'
+)
+const getAllTours = async (req, res) => {
 
-    try {
-    
-        if (id) {
-          
-          }
-          throw Error ('invalid data')
-    
-      } catch (error) {
-    
-        throw error('insufficient data')
-        
-      }
-      
-    }
+  try {
+    const allTours = await tour.findAll();
+    return allTours;
+  } catch (error) {
+    console.log('controller error', error)
+  }
 
-    module.exports = {getTours}
+}
+const getTours = async (id) => {
+
+  try {
+    const tourById = await tour.findByPk(id);
+    return tourById;
+  } catch (error) {
+    console.log('controller error', error);
+  }
+
+
+}
+
+
+module.exports = {
+  getTours,
+  getAllTours
+}
