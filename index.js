@@ -3,8 +3,8 @@ const server = require('./server/src/server')
 const { conn } = require('./server/src/sync/dbConnection');
 require('dotenv').config();
 
+conn.sync({ force: false }).then(() => {  //true=borra todo
 
-conn.sync({ force: true }).then(() => {  //se cambio de true a false
 
 
     server.listen(PORT, () => {
