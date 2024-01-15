@@ -34,14 +34,15 @@ userRouter.post("/",
     ], 
     postUserHandler);
 
+
 userRouter.get("/all", getAllUsersHandler);
 
 userRouter.get("/getuser/:id", 
+
     [
         check('id', 'id must be UUID format').isUUID(),
     ],
     getUserHandler);
-
 
 userRouter.put("/",
     [
@@ -49,6 +50,7 @@ userRouter.put("/",
     ],
     putUserHandler);
     
+
 userRouter.delete("/:id", deleteUserHandler);
 
 module.exports = userRouter;
