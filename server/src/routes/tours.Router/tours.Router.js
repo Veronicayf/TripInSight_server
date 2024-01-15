@@ -3,7 +3,7 @@ const { postToursHandler } = require('../../handlers/tours.Handler/tours.postHan
 const { check } = require('express-validator')
 
 const { getToursHandler, getAllToursHandler } = require('../../handlers/tours.Handler/tours.getHandler')
-// const { getToursByNameHandler } = require()
+const { getToursByNameHandler } = require('../../handlers/tours.Handler/tours.getByNameHandler')
 // const { getToursByTypeHandler } = require()
 // const { getToursByPriceHandler } = require()
 // const { getToursByGuideHandler } = require()
@@ -41,10 +41,10 @@ toursRouter.post("/", [
     postToursHandler)
 
 
-toursRouter.get("/:id", getToursHandler)// AGREGAR CHECK UUID
 toursRouter.get("/", getAllToursHandler)
+toursRouter.get("/nameTour", getToursByNameHandler) //coincidencias
+toursRouter.get("/:id", getToursHandler)// AGREGAR CHECK UUID
 
-// toursRouter.get("/", getToursByNameHandler) //coincidencias
 // toursRouter.get("/", getToursByTypeHandler)
 // toursRouter.get("/", getToursByPriceHandler)
 // toursRouter.get("/", getToursByCountryHandler) //filtro por paises
