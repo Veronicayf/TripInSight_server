@@ -21,6 +21,7 @@ const guide_toursModel = require('../models/guideTours/guideTours.model');
 //     logging: false,
 // });
 
+//base de datos local con variables en el .env
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
     host: process.env.DB_HOST,
     dialect: 'mysql',
@@ -51,6 +52,10 @@ client_purchased.hasMany(user, {
 
 guide_tours.hasMany(guide, {
     foreignKey: 'guide_tours'
+});
+
+guide.hasMany(tour, {
+   foreignKey: 'guide' 
 });
 
 module.exports = {

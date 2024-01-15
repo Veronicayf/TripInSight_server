@@ -1,6 +1,7 @@
-const putUser = async (id) =>{
+const putUser = async (forename, surname, nationality, image, birthDate, email, password, phoneNumber) =>{
 
   try {
+
 
     if (id) {
 
