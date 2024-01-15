@@ -1,23 +1,22 @@
-const { deleteGuide } = require('../../controllers/guide/guide.deleteController')
+const { getAllGuide } = require('../../controllers/guide/guite.getAllController')
 const { validationResult } = require('express-validator')
 
-const deleteGuideHandler = async (req, res) => {
+const getAllGuideHandler = async (req, res) => {
 
-    const { id } = req.params
+    try {
 
-    const errors = validationResult(req);
+        const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({
+            return res.status(404).json({
                 of: false,
                 errors: errors.mapped()
             })
-        } 
+        }
 
-    try {
-        const deletedGuide = await deleteGuide(id)
-        if(!deletedGuide) throw Error (`The user with the id : ${id} does not exist`)
+        const guide = await getAllGuide()
+        if(!guide) throw Error ("There are no guides to show registered")
 
-        res.status(200).json(deletedGuide)
+        res.status(200).json(guide)
         
     } catch (error) {
         res.status(404).json({
@@ -37,5 +36,5 @@ const deleteGuideHandler = async (req, res) => {
 
 
 module.exports = {
-    deleteGuideHandler,
+    getAllGuideHandler,
 }
