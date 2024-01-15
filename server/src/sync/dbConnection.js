@@ -17,7 +17,9 @@ const guide_toursModel = require('../models/guideTours/guideTours.model');
 //? Para uso de mi base de datos local
 
 
+
 const sequelize = new Sequelize('tripinsight', 'root', 'brandy123', {
+
 
     host: 'localhost',
     dialect: 'mysql',
@@ -48,6 +50,10 @@ client_purchased.hasMany(user, {
 
 guide_tours.hasMany(guide, {
     foreignKey: 'guide_tours'
+});
+
+guide.hasMany(tour, {
+   foreignKey: 'guide' 
 });
 
 module.exports = {

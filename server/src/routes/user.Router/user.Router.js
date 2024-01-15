@@ -5,6 +5,7 @@ const { postUserHandler } = require('../../handlers/user.Handler/user.postHandle
 const { putUserHandler } = require('../../handlers/user.Handler/user.putHandler');
 const { getUserHandler } = require('../../handlers/user.Handler/user.getHandler');
 const { deleteUserHandler } = require('../../handlers/user.Handler/user.deleteHandler');
+const { getAllUsersHandler } = require('../../handlers/user.Handler/user.getAllUsersHandler');
 
 //* Raul
 const userRouter = Router();
@@ -33,16 +34,23 @@ userRouter.post("/",
     ], 
     postUserHandler);
 
-userRouter.get("/:id", 
+
+userRouter.get("/all", getAllUsersHandler);
+
+userRouter.get("/getuser/:id", 
+
     [
         check('id', 'id must be UUID format').isUUID(),
     ],
     getUserHandler);
+
 userRouter.put("/",
     [
-        check('id', 'id must be UUID format').isUUID(),          
+        check('id', 'id must be UUID format').isUUID(),                  
     ],
     putUserHandler);
+    
+
 userRouter.delete("/:id", deleteUserHandler);
 
 module.exports = userRouter;
