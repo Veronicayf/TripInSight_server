@@ -2,10 +2,12 @@ const { Router } = require('express')
 const { postToursHandler } = require('../../handlers/tours.Handler/tours.postHandler')
 const { check } = require('express-validator')
 
+
 const { getAllToursHandler } = require('../../handlers/tours.Handler/tours.getHandler')
 const { getToursHandler } = require('../../handlers/tours.Handler/tours.getByIdHandler')
 
 // const { getToursByNameHandler } = require()
+
 // const { getToursByTypeHandler } = require()
 // const { getToursByPriceHandler } = require()
 // const { getToursByGuideHandler } = require()
@@ -33,10 +35,16 @@ toursRouter.post("/", [
 ], postToursHandler);
 
 
+
 toursRouter.get("/:id", getToursHandler)// AGREGAR CHECK UUID
+
 toursRouter.get("/", getAllToursHandler)
+toursRouter.get("/nameTour", getToursByNameHandler) //coincidencias
+toursRouter.get("/:id", getToursHandler)// AGREGAR CHECK UUID
+
 
 // toursRouter.get("/", getToursByNameHandler)
+
 // toursRouter.get("/", getToursByTypeHandler)
 // toursRouter.get("/", getToursByPriceHandler)
 // toursRouter.get("/", getToursByCountryHandler) 
