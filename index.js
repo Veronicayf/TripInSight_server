@@ -5,8 +5,10 @@ require('dotenv').config();
 
 conn.sync({ force: false }).then(() => {  //true=borra todo
 
-    server.listen(process.env.PORT, () => {
-        console.log(`Sevidor corriendo en puerto: ${process.env.PORT}`);
+
+
+    server.listen(PORT, () => {
+        console.log(`Sevidor corriendo en puerto: ${PORT}`);
     });
 
 }); 
