@@ -5,6 +5,7 @@ const { postGuideHandler } = require('../../handlers/guide.Handler/guide.postHan
 const { putGuideHandler } = require('../../handlers/guide.Handler/guide.putHandler')
 const { getGuideHandler } = require('../../handlers/guide.Handler/guide.getHandler')
 const { deleteGuideHandler } = require('../../handlers/guide.Handler/guide.deleteHandler')
+const { getAllGuideHandler } = require('../../handlers/guide.Handler/guide.getAllGuideHandler')
 
 const guideRouter = Router()
 
