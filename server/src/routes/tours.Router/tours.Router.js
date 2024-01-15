@@ -9,7 +9,7 @@ const { getToursHandler, getAllToursHandler } = require('../../handlers/tours.Ha
 // const { getToursByGuideHandler } = require()
 // const { getToursByCountryHandler } = require()
 const { putToursHandler } = require('../../handlers/tours.Handler/tours.putHandler')
-const { deleteToursHandler } = require('../../handlers/tours.Handler/tours.deleteHandler')
+const { deleteTourHandler } = require('../../handlers/tours.Handler/tours.deleteHandler')
 
 const toursRouter = Router();
 
@@ -83,6 +83,6 @@ toursRouter.get("/", getAllToursHandler)
 // toursRouter.get("/", getToursByCountryHandler) //filtro por paises
 // toursRouter.get("/", getToursByGuideHandler)
 toursRouter.put("/", putToursHandler)
-toursRouter.delete("/:id", deleteToursHandler)
+toursRouter.delete("/:id", deleteTourHandler)
 
 module.exports = toursRouter
