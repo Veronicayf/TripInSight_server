@@ -16,7 +16,7 @@ const guide_toursModel = require('../models/guideTours/guideTours.model');
 
 //? Para uso de mi base de datos local
 
-const sequelize = new Sequelize('tripinsight', 'root', 'hola1234', {
+const sequelize = new Sequelize('tripinsight', 'root', 'brandy123', {
     host: 'localhost',
     dialect: 'mysql',
     logging: false,

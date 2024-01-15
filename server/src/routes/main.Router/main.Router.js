@@ -9,7 +9,7 @@ const guideRouter = require('../guide.Router/guide.Router')
 const mainRouter = Router()
 console.log('router principal');
 mainRouter.use("/user", userRouter)
-mainRouter.use("/guide", guideRouter)
+mainRouter.use("/guides", guideRouter)
 mainRouter.use("/admin", adminRouter)
 mainRouter.use("/tours", toursRouter)
 
