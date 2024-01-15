@@ -5,6 +5,7 @@ const { check } = require('express-validator')
 
 const { getAllToursHandler } = require('../../handlers/tours.Handler/tours.getHandler')
 const { getToursHandler } = require('../../handlers/tours.Handler/tours.getByIdHandler')
+const { getToursByNameHandler } = require('../../handlers/tours.Handler/tours.getByNameHandler')
 
 // const { getToursByNameHandler } = require()
 
