@@ -6,7 +6,7 @@ const { check } = require('express-validator')
 const { getAllToursHandler } = require('../../handlers/tours.Handler/tours.getHandler')
 const { getToursHandler } = require('../../handlers/tours.Handler/tours.getByIdHandler')
 const { getToursByNameHandler } = require('../../handlers/tours.Handler/tours.getByNameHandler')
-
+const { getContinentHandler } = require('../../handlers/tours.Handler/tours.getByContinentHandler')
 // const { getToursByNameHandler } = require()
 
 // const { getToursByTypeHandler } = require()
@@ -15,8 +15,15 @@ const { getToursByNameHandler } = require('../../handlers/tours.Handler/tours.ge
 // const { getToursByCountryHandler } = require()
 const { putToursHandler } = require('../../handlers/tours.Handler/tours.putHandler')
 const { deleteTourHandler } = require('../../handlers/tours.Handler/tours.deleteHandler')
+const { tour } = require('../../sync/dbConnection')
 
 const toursRouter = Router();
+
+toursRouter.get("/continent", getContinentHandler)
+toursRouter.get("/nameTour", getToursByNameHandler) //coincidencias
+toursRouter.get("/:id", getToursHandler)// AGREGAR CHECK UUID
+toursRouter.get("/", getAllToursHandler)
+
 
 toursRouter.post("/", [
     check('nameTour', 'valid up to 50 characters').not().isEmpty().isString().isLength({ max: 50 }),
@@ -35,13 +42,6 @@ toursRouter.post("/", [
     check('equipment', 'valid up to 255 characters').not().isEmpty().isLength({ max: 255 }),
 ], postToursHandler);
 
-
-
-toursRouter.get("/:id", getToursHandler)// AGREGAR CHECK UUID
-
-toursRouter.get("/", getAllToursHandler)
-toursRouter.get("/nameTour", getToursByNameHandler) //coincidencias
-toursRouter.get("/:id", getToursHandler)// AGREGAR CHECK UUID
 
 
 // toursRouter.get("/", getToursByNameHandler)
