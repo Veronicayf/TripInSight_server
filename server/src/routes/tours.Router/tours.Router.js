@@ -35,7 +35,7 @@ toursRouter.post("/", [
     check('type', 'valid up to 20 characters').not().isEmpty().isLength({ max: 20 }),
     check('capacity', 'characters is not a number').not().isEmpty().isNumeric(),
     check('capacity', 'max 2 numbers').not().isEmpty().isInt().isLength({ max: 2 }),
-    check('description', 'valid up to 255 characters').not().isEmpty().isLength({ max: 255 }),
+    check('description', 'it cant be empty').not().isEmpty(),
     check('season', 'valid up to 10 characters').not().isEmpty().isLength({ max: 10 }),
     check('status', 'select one of the options').isBoolean(),
     check('price', 'Write only numbers').not().isEmpty().isNumeric().isLength({ min: 3, max: 10 }),
