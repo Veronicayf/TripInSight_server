@@ -13,16 +13,20 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         initialDate: {
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             allowNull: false,
         },
         endDate: {
-            type: DataTypes.DATE,
+            type: DataTypes.DATEONLY,
             allowNull: false
         },
         image: {
             type: DataTypes.STRING,
             allowNull: true,
+        },
+        continent: {
+            type: DataTypes.STRING,
+            allowNull: true
         },
         country: {
             type: DataTypes.STRING,
