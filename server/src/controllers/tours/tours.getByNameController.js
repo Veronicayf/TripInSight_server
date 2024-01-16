@@ -6,6 +6,7 @@ const getToursByName = async(name) =>{
     if (name){
         const tours = await tour.findAll({ where: { nameTour:
            {[Op.like] :`%${name}%`} } })
+          
          return tours
      }
         throw Error ("There are no tours with that name")
@@ -13,5 +14,3 @@ const getToursByName = async(name) =>{
      
  
  module.exports = { getToursByName }
-
- 
