@@ -7,7 +7,7 @@ const { getAllToursHandler } = require('../../handlers/tours.Handler/tours.getHa
 const { getToursHandler } = require('../../handlers/tours.Handler/tours.getByIdHandler')
 const { getToursByNameHandler } = require('../../handlers/tours.Handler/tours.getByNameHandler')
 const { getContinentHandler } = require('../../handlers/tours.Handler/tours.getByContinentHandler')
-// const { getToursByNameHandler } = require()
+const { tagsHandler } = require('../../handlers/tours.Handler/tours.getTagsHandler')
 
 // const { getToursByTypeHandler } = require()
 // const { getToursByPriceHandler } = require()
@@ -19,6 +19,7 @@ const { tour } = require('../../sync/dbConnection')
 
 const toursRouter = Router();
 
+toursRouter.get("/tags", tagsHandler)
 toursRouter.get("/continent", getContinentHandler)
 toursRouter.get("/nameTour", getToursByNameHandler) //coincidencias
 toursRouter.get("/:id", getToursHandler)// AGREGAR CHECK UUID
@@ -35,7 +36,7 @@ toursRouter.post("/", [
     check('type', 'valid up to 20 characters').not().isEmpty().isLength({ max: 20 }),
     check('capacity', 'characters is not a number').not().isEmpty().isNumeric(),
     check('capacity', 'max 2 numbers').not().isEmpty().isInt().isLength({ max: 2 }),
-    check('description', 'valid up to 255 characters').not().isEmpty().isLength({ max: 255 }),
+    check('description', 'it cant be empty').not().isEmpty(),
     check('season', 'valid up to 10 characters').not().isEmpty().isLength({ max: 10 }),
     check('status', 'select one of the options').isBoolean(),
     check('price', 'Write only numbers').not().isEmpty().isNumeric().isLength({ min: 3, max: 10 }),

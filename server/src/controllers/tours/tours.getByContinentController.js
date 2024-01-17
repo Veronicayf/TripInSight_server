@@ -1,5 +1,3 @@
-const { Sequelize } = require('sequelize')
-const Op = Sequelize.OP
 const { tour } = require('../../sync/dbConnection')
 
 const getContinentController = async (continent) => {

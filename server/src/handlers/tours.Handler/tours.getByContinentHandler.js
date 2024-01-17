@@ -23,7 +23,7 @@ const getContinentHandler = async (req, res) => {
             errors: {
                 continent: {
                     type: 'field',
-                    value: req.query.continent,
+                    // value: req.query.continent,
                     msg: error.message,
                     path: 'continent',
                     location: 'query',
