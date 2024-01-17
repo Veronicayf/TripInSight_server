@@ -67,6 +67,10 @@ module.exports = (sequelize) => {
         tags: { //se agrego nueva propiedad
             type: DataTypes.STRING,
             allowNull: false
+        },
+        photos: {
+            type: DataTypes.JSON,
+            allowNull: false
         }
     }, { timestamps: false });
 }
