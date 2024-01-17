@@ -64,6 +64,9 @@ module.exports = (sequelize) => {
             type: DataTypes.TEXT,
             allowNull: false
         },
-        //Agregar rating- 1...5
+        tags: { //se agrego nueva propiedad
+            type: DataTypes.STRING,
+            allowNull: false
+        }
     }, { timestamps: false });
 }

@@ -7,7 +7,7 @@ const { getAllToursHandler } = require('../../handlers/tours.Handler/tours.getHa
 const { getToursHandler } = require('../../handlers/tours.Handler/tours.getByIdHandler')
 const { getToursByNameHandler } = require('../../handlers/tours.Handler/tours.getByNameHandler')
 const { getContinentHandler } = require('../../handlers/tours.Handler/tours.getByContinentHandler')
-// const { getToursByNameHandler } = require()
+const { tagsHandler } = require('../../handlers/tours.Handler/tours.getTagsHandler')
 
 // const { getToursByTypeHandler } = require()
 // const { getToursByPriceHandler } = require()
@@ -19,6 +19,7 @@ const { tour } = require('../../sync/dbConnection')
 
 const toursRouter = Router();
 
+toursRouter.get("/tags", tagsHandler)
 toursRouter.get("/continent", getContinentHandler)
 toursRouter.get("/nameTour", getToursByNameHandler) //coincidencias
 toursRouter.get("/:id", getToursHandler)// AGREGAR CHECK UUID
