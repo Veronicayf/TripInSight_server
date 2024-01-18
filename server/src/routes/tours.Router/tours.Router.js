@@ -15,7 +15,7 @@ const { tagsHandler } = require('../../handlers/tours.Handler/tours.getTagsHandl
 // const { getToursByCountryHandler } = require()
 const { putToursHandler } = require('../../handlers/tours.Handler/tours.putHandler')
 
-const { deleteToursHandler } = require('../../handlers/tours.Handler/tours.deleteHandler')
+const { deleteTourHandler } = require('../../handlers/tours.Handler/tours.deleteHandler')
 const { putGuideTourHandler } = require('../../handlers/tours.Handler/tours.putGuideTour')
 
 
@@ -23,13 +23,13 @@ const toursRouter = Router();
 
 toursRouter.get("/tags", tagsHandler)
 toursRouter.get("/continent", getContinentHandler)
-toursRouter.get("/nameTour", getToursByNameHandler) //coincidencias
-toursRouter.get("/:id", getToursHandler)// AGREGAR CHECK UUID
+toursRouter.get("/nameTour", getToursByNameHandler)
+toursRouter.get("/:id", getToursHandler)
 toursRouter.get("/", getAllToursHandler)
 
 
 toursRouter.post("/", [
-       
+
     check('nameTour', 'valid up to 50 characters').not().isEmpty().isString().isLength({ max: 50 }),
     check('initialDate', 'write a correct format (yyyy-mm-dd)').isISO8601(),
     check('endDate', 'write a correct format (yyyy-mm-dd)').isISO8601(),
@@ -44,49 +44,13 @@ toursRouter.post("/", [
     check('status', 'select one of the options').isBoolean(),
     check('price', 'Write only numbers').not().isEmpty().isNumeric().isLength({ min: 3, max: 10 }),
     check('equipment', 'valid up to 255 characters').not().isEmpty().isLength({ max: 255 }),
-
     check('guide', 'Guide input has to be uuid format').optional().isUUID(),
-    // formatDates,  // Middleware para formatear las fechas antes de la validación
-
-
-
-
-
+], postToursHandler)
 
 toursRouter.put('/postguidetour', putGuideTourHandler);
-
-
-// toursRouter.post("/", [
-
-//     check('nameTour', 'valid up to 50 characters').not().isEmpty().isString().isLength({ max: 50 }),
-
-//     check('initialDate', 'write a correct formate (yyyy-mm-dd)').isISO8601(),
-//     check('endDate', 'write a correct formate (yyyy-mm-dd)').isISO8601(),
-
-//     check('image', 'Invalidate URL').isURL(),
-//     check('country', 'valid up to 20 characters').not().isEmpty().isLength({ max: 20 }),
-//     check('city', 'valid up to 20 charactere').not().isEmpty().isLength({ max: 20 }),
-//     check('type', 'valid up to 20 character').not().isEmpty().isLength({ max: 20 }), //paisajes, animales, fotografia, safari.
-
-//     check('capacity', 'characters is not a number').not().isEmpty().isNumeric(),
-//     check('capacity', 'max 2 numbers').not().isEmpty().isInt().isLength({ max: 2 }),
-
-
-//     check('description', 'valid up to 255 characters').not().isEmpty().isLength({ max: 255 }),
-//     check('season', 'valid up to 10 characters').not().isEmpty().isLength({ max: 10 }), //summer, winter, spring, fall.
-
-//     //!VERIFICAR CON LOS CHICOS________________________
-//     check('status', 'select one of the options').isBoolean(), //true=Activo ó false=Inactivo
-
-//     check('price', 'Write only numbers').not().isEmpty().isNumeric().isLength({ min: 3, max: 10 }),
-//     check('equipment', 'valid up to 255 characters').not().isEmpty().isLength({ max: 255 }),
-// ],
-//     postToursHandler)
-
-
 toursRouter.get("/", getAllToursHandler)
-toursRouter.get("/nameTour", getToursByNameHandler) //coincidencias
-toursRouter.get("/:id", getToursHandler)// AGREGAR CHECK UUID
+toursRouter.get("/nameTour", getToursByNameHandler)
+toursRouter.get("/:id", getToursHandler)
 
 
 // toursRouter.get("/", getToursByTypeHandler)
