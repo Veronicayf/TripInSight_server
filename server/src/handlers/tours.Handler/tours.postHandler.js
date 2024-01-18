@@ -13,15 +13,22 @@ const postToursHandler = async (req, res) => {
             return res.status(400).json({ error: `missing required fields: ${missingData.join(', ')}` });
         }
 
-        const errors = validationResult(req);
+        const errors = validationResult(req);        
         if (!errors.isEmpty()) {
             return res.status(400).json({
-                of: false,
+                ok: false,
                 errors: errors.mapped()
             })
+        }                   
+        
+        const newTour = await postTours(tourData)
+        
+        //Solo se agrega el guía si viene en el body.
+        const {guideId} = req.body;        
+        if(guideId) {                        
+            newTour.addGuide(guideId);
         }
 
-        const newTour = await postTours(tourData);
         res.status(200).json(newTour);
     } catch (error) {
         res.status(500).json(error.message);
