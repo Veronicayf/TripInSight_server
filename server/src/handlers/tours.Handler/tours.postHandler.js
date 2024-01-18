@@ -21,7 +21,7 @@ const postToursHandler = async (req, res) => {
             })
         }                   
         
-        const newTour = await postTours(tourData);
+        const newTour = await postTours(tourData)
         
         //Solo se agrega el guía si viene en el body.
         const {guideId} = req.body;        
