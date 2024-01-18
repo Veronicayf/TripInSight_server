@@ -14,11 +14,16 @@ const client_purchasedModel = require('../models/clientPurchased/clientPurchased
 // });
 
 //? Para uso de mi base de datos local
+// const sequelize = new Sequelize('tripinsight', 'root', 'hola1234', {
+//     host: 'localhost',
+//     dialect: 'mysql',
+//     logging: false,
+// });
 
 
-const sequelize = new Sequelize('tripinsight', 'root', 'Linkjunior9330', {
-
-    host: 'localhost',
+//base de datos local con variables en el .env
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+    host: process.env.DB_HOST,
     dialect: 'mysql',
     logging: false,
 });
