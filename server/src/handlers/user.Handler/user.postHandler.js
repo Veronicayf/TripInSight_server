@@ -1,11 +1,12 @@
 const { postUser } = require('../../controllers/User/user.postController');
 const { validationResult } = require('express-validator');
 const nodemailer = require('nodemailer');
-const user = require('../../models/user/user.model')
+
+
 //* Raul. 
 const postUserHandler = async (req, res) => {
 
-    const { forename, surname, nationality, image, birthDate, email, password, phoneNumber } = req.body;
+    const { forename, surname, nationality, image, birthDate, email, admin, phoneNumber } = req.body;
 
     try {
 
@@ -17,7 +18,7 @@ const postUserHandler = async (req, res) => {
             })
         }
 
-        const newUser = await postUser(forename, surname, nationality, image, birthDate, email, password, phoneNumber);
+        const newUser = await postUser(forename, surname, nationality, image, birthDate, email, admin, phoneNumber);        
 
         const transporter = nodemailer.createTransport({
 
@@ -36,11 +37,12 @@ const postUserHandler = async (req, res) => {
             subject: "funciona por favor!!!",
             text: "Envio de correo desde node utilizando nodemailer",
         }
-        await transporter.sendMail(mensaje)
+        await transporter.sendMail(mensaje);
 
         res.status(201).json(newUser);
 
     } catch (error) {
+        console.log('llego a este error user.posthandler');
         res.status(404).json({ error: error.message });
     }
 }
