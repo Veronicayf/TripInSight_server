@@ -1,11 +1,11 @@
 
 const { user } = require('../../sync/dbConnection');
 
-const postUser = async (forename, surname, nationality, image, birthDate, email, password, phoneNumber) => {
+const postUser = async (forename, surname, nationality, image, birthDate, email, admin, phoneNumber) => {
 
   try {
 
-    if (forename && surname && nationality && image && birthDate && email && password && phoneNumber) {
+    if (forename && surname && image && email ) {
 
       const newUser = await user.create({
         forename,
@@ -14,7 +14,7 @@ const postUser = async (forename, surname, nationality, image, birthDate, email,
         image,
         birthDate,
         email,
-        password,
+        admin,
         phoneNumber,
       });
 

@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
         },
         nationality: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: true //! modificado para funcionar con auth.
         },
         image: {
             type: DataTypes.STRING, //tipo URL buscar
@@ -26,20 +26,20 @@ module.exports = (sequelize) => {
         },
         birthDate: {
             type: DataTypes.STRING, //formato fecha dd/mm/yyyy
-            allowNull: false
+            allowNull: true //! modificado para funcionar con auth.
         },
         //A CONVERSAR
         email: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
+        admin: {
+            type: DataTypes.BOOLEAN, 
+            allowNull: true, //! modificado para funcionar con auth.
         },
         phoneNumber: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
+            type: DataTypes.STRING, //! Cambiado a string.
+            allowNull: true, //! modificado para funcionar con auth.
         }
     }, { timestamps: false });
 }
