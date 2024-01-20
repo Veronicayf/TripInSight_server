@@ -2,18 +2,17 @@ const { putGuide } = require('../../controllers/guide/guide.putController')
 
 const putGuideHandler = async (req, res) => {
 
-    const { id } = req.params
+    const {id, forename, surname, nationality, image, birthDate, biography} = req.body;
 
     try {
-        const user = await putGuide( id )
-        if(!id) throw Error (`The user with the id : ${id} does not exist`)
-
-        res.status(200).json(user)
-        
-    } catch (error) {
-        res.status(404).json({error: error.message})
+        const updateGuide = await putGuide(id, forename, surname, nationality, image, birthDate, biography)
+        return res.json(updateGuide);
+    } catch(error) {
+        return res.status(404).json(error);
     }
+       
 }
+
 
 
 module.exports = {
