@@ -1,20 +1,29 @@
 const { getAllUsers } = require("../../controllers/User/user.getAllUsersController");
-const { user } = require("../../sync/dbConnection")
-
 
 const getAllUsersHandler = async (req, res) => {
 
-    const users = await getAllUsers();
+    const {page, pagesize} = req.query;
 
-    if(users.length === 0) {
-        return res.status(404).json({
-            errors: {
-                msg: 'there is no users on database',
-            }
-        });
+    try{
+        const users = await getAllUsers(page, pagesize);
+
+        if(users.length === 0) {
+            return res.status(404).json({
+                errors: {
+                    msg: 'there is no users on database',
+                }
+            });
+        }
+        
+        if(users.errors) {
+            return res.status(400).json(users);
+        }
+
+        return res.json(users);
+
+    }catch(error) {
+        return res.status(400).json({error: error});
     }
-    
-    return res.json(users);
     
 }
 
