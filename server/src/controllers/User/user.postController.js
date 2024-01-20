@@ -1,32 +1,48 @@
 
 const { user } = require('../../sync/dbConnection');
 
-const postUser = async (forename, surname, nationality, image, birthDate, email, admin, phoneNumber) => {
+const postUser = async (auth0Id ,forename, surname, nationality, image, birthDate, email, admin, phoneNumber) => {
 
-  try {
+	console.log(auth0Id);
 
-    if (forename && surname && image && email ) {
+	try {
 
-      const newUser = await user.create({
-        forename,
-        surname,
-        nationality,
-        image,
-        birthDate,
-        email,
-        admin,
-        phoneNumber,
-      });
+		if (forename && surname && image && email ) {
 
-      return newUser;
-    }
+			if(auth0Id) {
+				
+				const [search, created] = await user.findOrCreate({
+					where: {auth0Id: auth0Id},
+					defaults: {
+						auth0Id: auth0Id,
+						forename: forename,
+						surname: surname,
+						email: email,
+						image: image,					
+					}
+				});
+				
+				return search;
+			}
 
-    return newUser;
+			const newUser = user.create({				
+				forename: forename,
+				surname: surname,
+				email: email,
+				image: image,
+				nationality,
+				birthDate,
+				phoneNumber,
+				admin
+			});
 
-  } catch (error) {
+			return newUser;
+		}
 
-    throw error;
-  }
+	} catch (error) {
+
+		throw error;
+	}
 
 }
 

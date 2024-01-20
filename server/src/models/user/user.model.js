@@ -8,6 +8,10 @@ module.exports = (sequelize) => {
             allowNull: false,
             defaultValue: DataTypes.UUIDV4
         },
+        auth0Id: {
+            type: DataTypes.STRING,
+            allowNull: true,            
+        },
         forename: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -35,7 +39,11 @@ module.exports = (sequelize) => {
         },
         admin: {
             type: DataTypes.BOOLEAN, 
-            allowNull: true, //! modificado para funcionar con auth.
+            defaultValue: false, //! modificado para funcionar con auth.            
+        },
+        isBanned: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
         },
         phoneNumber: {
             type: DataTypes.STRING, //! Cambiado a string.
