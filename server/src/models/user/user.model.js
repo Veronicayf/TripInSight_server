@@ -12,17 +12,13 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: true,            
         },
-        forename: {
+        name: {
             type: DataTypes.STRING,
-            allowNull: false,
-        },
-        surname: {
-            type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false,            
         },
         nationality: {
             type: DataTypes.STRING,
-            allowNull: true //! modificado para funcionar con auth.
+            allowNull: true 
         },
         image: {
             type: DataTypes.STRING, //tipo URL buscar
@@ -30,24 +26,22 @@ module.exports = (sequelize) => {
         },
         birthDate: {
             type: DataTypes.STRING, //formato fecha dd/mm/yyyy
-            allowNull: true //! modificado para funcionar con auth.
-        },
-        //A CONVERSAR
+            allowNull: true 
+        },        
         email: {
             type: DataTypes.STRING,
             allowNull: false,
         },
         admin: {
-            type: DataTypes.BOOLEAN, 
-            defaultValue: false, //! modificado para funcionar con auth.            
+            type: DataTypes.BOOLEAN,                                    
         },
         isBanned: {
             type: DataTypes.BOOLEAN,
             defaultValue: false,
         },
         phoneNumber: {
-            type: DataTypes.STRING, //! Cambiado a string.
-            allowNull: true, //! modificado para funcionar con auth.
+            type: DataTypes.STRING, 
+            allowNull: true, 
         }
     }, { timestamps: false });
 }

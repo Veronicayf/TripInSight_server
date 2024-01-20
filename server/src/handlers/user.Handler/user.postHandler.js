@@ -6,7 +6,7 @@ const nodemailer = require('nodemailer');
 //* Raul. 
 const postUserHandler = async (req, res) => {
 
-    const { auth0Id, forename, surname, nationality, image, birthDate, email, phoneNumber } = req.body;
+    const { auth0Id, name, nationality, image, birthDate, email, phoneNumber, admin } = req.body;
 
     try {
 
@@ -18,7 +18,7 @@ const postUserHandler = async (req, res) => {
             })
         }
 
-        const newUser = await postUser(auth0Id ,forename, surname, nationality, image, birthDate, email, phoneNumber);        
+        const newUser = await postUser(auth0Id, name, nationality, image, birthDate, email, admin, phoneNumber);        
 
         const transporter = nodemailer.createTransport({
 
