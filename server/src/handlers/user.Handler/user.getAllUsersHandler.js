@@ -11,6 +11,7 @@ const getAllUsersHandler = async (req, res) => {
             return res.status(404).json({
                 errors: {
                     msg: 'there are no users on database',
+
                 }
             });
         }
