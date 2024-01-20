@@ -1,24 +1,21 @@
 
 const { user } = require('../../sync/dbConnection');
 
-const postUser = async (auth0Id ,forename, surname, nationality, image, birthDate, email, admin, phoneNumber) => {
-
-	console.log(auth0Id);
-
+const postUser = async (auth0Id, name, nationality, image, birthDate, email, admin, phoneNumber) => {
+		
 	try {
 
-		if (forename && surname && image && email ) {
+		if (name && image && email ) {
 
-			if(auth0Id) {
+			if(auth0Id) { //Registra un usuario que venga de google.
 				
 				const [search, created] = await user.findOrCreate({
 					where: {auth0Id: auth0Id},
 					defaults: {
 						auth0Id: auth0Id,
-						forename: forename,
-						surname: surname,
+						name: name,
 						email: email,
-						image: image,					
+						image: image,										
 					}
 				});
 				
@@ -26,14 +23,13 @@ const postUser = async (auth0Id ,forename, surname, nationality, image, birthDat
 			}
 
 			const newUser = user.create({				
-				forename: forename,
-				surname: surname,
+				name: name,
 				email: email,
 				image: image,
 				nationality,
 				birthDate,
 				phoneNumber,
-				admin
+				admin: admin				
 			});
 
 			return newUser;

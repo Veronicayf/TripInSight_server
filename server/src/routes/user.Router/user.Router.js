@@ -13,13 +13,7 @@ const userRouter = Router();
 
 userRouter.post("/", 
     [
-        check('forename', `Name input should be filled`).not().isEmpty(),
-        check('forename', 'Name input should be a string').isString(),
-        check('forename', 'Name must be less than 25 characters').isLength({max: 25}),
-
-        check('surname', `lastname input should be filled`).not().isEmpty(),
-        check('surname', 'lastname input should be a string').isString(),
-        check('surname', 'lastname must be less than 25 char').isLength({max: 25}),   
+        check('name', 'name has to be a string').isString().not().isEmpty(),  
         
         check('auth0Id', 'auth0Id must be a string').optional().isString(),
         
@@ -30,7 +24,7 @@ userRouter.post("/",
 
         check('email', 'email input should be an email').isEmail(),
 
-        check('admin', 'admin must be true or false').isBoolean(),
+        check('admin', 'admin must be true or false').optional().isBoolean(),
 
         check('phoneNumber', 'phoneNumber should be an integer').optional().isString(),            
     ], 
