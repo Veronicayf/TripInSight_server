@@ -8,7 +8,7 @@ const { deleteUserHandler } = require('../../handlers/user.Handler/user.deleteHa
 const { getAllUsersHandler } = require('../../handlers/user.Handler/user.getAllUsersHandler');
 const { updateUserHandler } = require('../../handlers/user.Handler/user.updateUserHandler');
 
-//* Raul
+//* Raul.
 const userRouter = Router();
 
 userRouter.post("/", 
@@ -19,8 +19,10 @@ userRouter.post("/",
 
         check('surname', `lastname input should be filled`).not().isEmpty(),
         check('surname', 'lastname input should be a string').isString(),
-        check('surname', 'lastname must be less than 25 char').isLength({max: 25}),            
-
+        check('surname', 'lastname must be less than 25 char').isLength({max: 25}),   
+        
+        check('auth0Id', 'auth0Id must be a string').optional().isString(),
+        
         check('nationality', `nationality input should be filled`).optional().isString(),                    
 
         check('image', 'image should be an url').isURL(),
