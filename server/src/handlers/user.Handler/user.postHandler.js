@@ -18,7 +18,7 @@ const postUserHandler = async (req, res) => {
             })
         }
 
-        const newUser = await postUser(forename, surname, nationality, image, birthDate, email, admin, phoneNumber);        
+        const newUser = await postUser(forename, surname, nationality, image, birthDate, email, admin, phoneNumber);
 
         const transporter = nodemailer.createTransport({
 
@@ -26,8 +26,8 @@ const postUserHandler = async (req, res) => {
             port: 587,
             secure: false,
             auth: {
-                user: 'maribueno1587@gmail.com',
-                pass: 'mmoxvtyvflzkvqea',
+                user: 'tripinsight.tours@gmail.com',
+                pass: 'mipzpxibnmhsiexm',
             },
         });
 
