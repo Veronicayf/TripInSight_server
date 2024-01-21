@@ -1,18 +1,20 @@
-const putTours = async (id) =>{
+const { tour } = require('../../sync/dbConnection');
 
+const putTours = async (id, tourData) => {
   try {
-  
-      if (id) {
-        
-        }
-        throw Error ('invalid data')
-  
-    } catch (error) {
-  
-      throw error('insufficient data')
-      
-    }
-    
-  }
+    const existingTour = await tour.findByPk(id);
 
-  module.exports = {putTours}
+    if (!existingTour) {
+      return { success: false, message: 'Tour not found' };
+    }
+
+    await existingTour.update(tourData);
+    return existingTour
+
+  } catch (error) {
+    console.error('Error updating tour:', error);
+    throw error;
+  }
+};
+
+module.exports = { putTours };
