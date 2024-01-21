@@ -8,17 +8,17 @@ module.exports = (sequelize) => {
             allowNull: false,
             defaultValue: DataTypes.UUIDV4
         },
-        forename: {
+        auth0Id: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,            
         },
-        surname: {
+        name: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: false,            
         },
         nationality: {
             type: DataTypes.STRING,
-            allowNull: true //! modificado para funcionar con auth.
+            allowNull: true 
         },
         image: {
             type: DataTypes.STRING, //tipo URL buscar
@@ -26,20 +26,22 @@ module.exports = (sequelize) => {
         },
         birthDate: {
             type: DataTypes.STRING, //formato fecha dd/mm/yyyy
-            allowNull: true //! modificado para funcionar con auth.
-        },
-        //A CONVERSAR
+            allowNull: true 
+        },        
         email: {
             type: DataTypes.STRING,
             allowNull: false,
         },
         admin: {
-            type: DataTypes.BOOLEAN, 
-            allowNull: true, //! modificado para funcionar con auth.
+            type: DataTypes.BOOLEAN,                                    
+        },
+        isBanned: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
         },
         phoneNumber: {
-            type: DataTypes.STRING, //! Cambiado a string.
-            allowNull: true, //! modificado para funcionar con auth.
+            type: DataTypes.STRING, 
+            allowNull: true, 
         }
     }, { timestamps: false });
 }

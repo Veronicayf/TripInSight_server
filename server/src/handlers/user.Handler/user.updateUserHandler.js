@@ -2,13 +2,16 @@ const { updateUserController } = require("../../controllers/User/user.updateUser
 
 const updateUserHandler = async(req, res) => {
 
-    const {nationality, birthDate, phoneNumber, idUser} = req.body;
+    const {nationality, birthDate, phoneNumber, admin, isBanned, idUser} = req.body;
 
     try {
-        const updatedUser = await updateUserController(nationality, birthDate, phoneNumber, idUser)
+        const updatedUser = await updateUserController(nationality, birthDate, phoneNumber, admin, isBanned, idUser)
+        
+        if(updatedUser.error) throw updatedUser.error;
+
         return res.json(updatedUser);
     } catch(error) {
-        return res.status(404).json(error);
+        return res.status(500).json(error);
     }
        
 }

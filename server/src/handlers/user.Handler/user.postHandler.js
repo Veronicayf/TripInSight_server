@@ -6,7 +6,7 @@ const nodemailer = require('nodemailer');
 //* Raul. 
 const postUserHandler = async (req, res) => {
 
-    const { forename, surname, nationality, image, birthDate, email, admin, phoneNumber } = req.body;
+    const { auth0Id, name, nationality, image, birthDate, email, phoneNumber, admin } = req.body;
 
     try {
 
@@ -18,7 +18,9 @@ const postUserHandler = async (req, res) => {
             })
         }
 
-        const newUser = await postUser(forename, surname, nationality, image, birthDate, email, admin, phoneNumber);
+
+        const newUser = await postUser(auth0Id, name, nationality, image, birthDate, email, admin, phoneNumber);        
+
 
         const transporter = nodemailer.createTransport({
 
@@ -41,8 +43,7 @@ const postUserHandler = async (req, res) => {
 
         res.status(201).json(newUser);
 
-    } catch (error) {
-        console.log('llego a este error user.posthandler');
+    } catch (error) {        
         res.status(404).json({ error: error.message });
     }
 }
