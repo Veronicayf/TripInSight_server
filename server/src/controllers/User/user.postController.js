@@ -1,5 +1,32 @@
-
+const nodemailer = require('nodemailer')
 const { user } = require('../../sync/dbConnection');
+
+const sendWelcomeEmail = async (email) => {
+
+	const transporter = nodemailer.createTransport({
+
+		host: 'smtp.gmail.com',
+		port: 587,
+		secure: false,
+		auth: {
+			user: 'tripinsight.tours@gmail.com',
+			pass: 'mipzpxibnmhsiexm',
+		},
+	});
+
+	const welcomeMessage = {
+
+		from: process.env.SMTP_USER,
+		to: email,
+		subject: "Bienvenido!!!",
+		text: "Gracias por formar parte de TRIP IN SIGHT"
+	};
+
+	await transporter.sendMail(welcomeMessage);
+
+	await user.update({ emailSent: true }, { where: { email: email } })
+};
+
 
 const postUser = async (auth0Id, name, nationality, image, birthDate, email, admin, phoneNumber) => {
 
@@ -19,6 +46,10 @@ const postUser = async (auth0Id, name, nationality, image, birthDate, email, adm
 					}
 				});
 
+				if (!search.emailSent) {
+					await sendWelcomeEmail(email);
+				}
+
 				return search;
 			}
 
@@ -32,6 +63,10 @@ const postUser = async (auth0Id, name, nationality, image, birthDate, email, adm
 				admin: admin,
 				emailSent: false
 			});
+
+			if (!newUser.emailSent) {
+				await sendWelcomeEmail(email);
+			}
 
 			return newUser;
 		}
