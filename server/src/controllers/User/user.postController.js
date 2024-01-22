@@ -1,41 +1,59 @@
+const fs = require('fs');
 const nodemailer = require('nodemailer')
 const { user } = require('../../sync/dbConnection');
 
-const sendWelcomeEmail = async (email) => {
+const estadoEnvioPath = 'estadoEnvio.json';
 
-	const transporter = nodemailer.createTransport({
+const enviarEmail = async (destinatario) => {
+	let estadoEnvio = {};
+	try {
+		estadoEnvio = JSON.parse(fs.readFileSync(estadoEnvioPath, 'utf8'));
+	} catch (error) {
+		console.error('error al leer el estado del archivo', error.message);
+	}
 
-		host: 'smtp.gmail.com',
+	if (estadoEnvio[destinatario]) {
+		console.log(`el correo fue enviado a: ${destinatario}`);
+		return;
+	}
+
+	const configuracion = {
+		host: "smtp.gmail.com",
 		port: 587,
-		secure: false,
 		auth: {
-			user: 'tripinsight.tours@gmail.com',
-			pass: 'mipzpxibnmhsiexm',
+			user: "maribueno1587@gmail.com",
+			pass: "mmoxvtyvflzkvqea",
 		},
-	});
+	}
 
-	const welcomeMessage = {
+	const mensaje = {
+		from: "maribueno1587@gmail.com",
+		to: destinatario,
+		subject: "correo de prueba",
+		text: "Envio de correo desde node utilizando nodemailer",
+	}
 
-		from: process.env.SMTP_USER,
-		to: email,
-		subject: "Bienvenido!!!",
-		text: "Gracias por formar parte de TRIP IN SIGHT"
-	};
-
-	await transporter.sendMail(welcomeMessage);
-
-	await user.update({ emailSent: true }, { where: { email: email } })
-};
-
-
-const postUser = async (auth0Id, name, nationality, image, birthDate, email, admin, phoneNumber) => {
+	const transporter = nodemailer.createTransport(configuracion);
 
 	try {
+		// Enviar el correo
+		const info = await transporter.sendMail(mensaje);
+		console.log(`Correo enviado a ${destinatario}`);
 
+		// Marcar el correo como enviado en el estado
+		estadoEnvio[destinatario] = true;
+
+		// Guardar el estado actualizado en el archivo JSON
+		fs.writeFileSync(estadoEnvioPath, JSON.stringify(estadoEnvio, null, 2));
+	} catch (error) {
+		console.error('Error al enviar el correo:', error.message);
+	}
+}
+
+const postUser = async (auth0Id, name, nationality, image, birthDate, email, admin, phoneNumber) => {
+	try {
 		if (name && image && email) {
-
-			if (auth0Id) { //Registra un usuario que venga de google.
-
+			if (auth0Id) { // Registra un usuario que venga de google.
 				const [search, created] = await user.findOrCreate({
 					where: { auth0Id: auth0Id },
 					defaults: {
@@ -47,7 +65,8 @@ const postUser = async (auth0Id, name, nationality, image, birthDate, email, adm
 				});
 
 				if (!search.emailSent) {
-					await sendWelcomeEmail(email);
+					await enviarEmail(email);
+					await search.update({ emailSent: true });
 				}
 
 				return search;
@@ -61,21 +80,13 @@ const postUser = async (auth0Id, name, nationality, image, birthDate, email, adm
 				birthDate,
 				phoneNumber,
 				admin: admin,
-				emailSent: false
+				emailSent: true,
 			});
-
-			if (!newUser.emailSent) {
-				await sendWelcomeEmail(email);
-			}
-
 			return newUser;
 		}
-
 	} catch (error) {
-
 		throw error;
 	}
-
 }
 
-module.exports = { postUser }
+module.exports = { postUser };
