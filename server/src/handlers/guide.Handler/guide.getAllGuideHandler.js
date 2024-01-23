@@ -1,37 +1,30 @@
-const { getAllGuide } = require('../../controllers/guide/guite.getAllController')
+const { getAllGuide } = require('../../controllers/guide/guide.getAllController')
 const { validationResult } = require('express-validator')
 
 const getAllGuideHandler = async (req, res) => {
 
-    try {
+    const { page, pagesize } = req.query
 
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(404).json({
-                of: false,
-                errors: errors.mapped()
-            })
-        }
+try {
 
-        const guide = await getAllGuide()
-        if(!guide) throw Error ("There are no guides to show registered")
+    const guide = await getAllGuide(page, pagesize)
 
-        res.status(200).json(guide)
-        
-    } catch (error) {
-        res.status(404).json({
-            ok: false,
+    if (guide.length === 0) { 
+        return res.status(400).json({
             errors: {
-                id: {
-                     type: "field",
-                     value: id,
-                     msg: error.message,
-                     path: "id",
-                     location: "params"
-                    }
-                }
-            })
-        }
+                msg: 'there are no guides on database'
+            }
+        })
+    }
+
+      if (guide.errors) return res.status(400).json(users)
+       res.status(200).json(guide)
+    
+} catch (error) {
+    res.status(400).json({error: error})
+}
+        
+    
 }
 
 
