@@ -47,6 +47,7 @@ toursRouter.post("/", [
     check('guide', 'Guide input has to be uuid format').optional().isUUID(),
 ], postToursHandler)
 
+toursRouter.put('/:id', putToursHandler)
 toursRouter.put('/postguidetour', putGuideTourHandler);
 toursRouter.get("/", getAllToursHandler)
 toursRouter.get("/nameTour", getToursByNameHandler)
@@ -57,7 +58,6 @@ toursRouter.get("/:id", getToursHandler)
 // toursRouter.get("/", getToursByPriceHandler)
 // toursRouter.get("/", getToursByCountryHandler) 
 // toursRouter.get("/", getToursByGuideHandler)
-toursRouter.put("/", putToursHandler)
 toursRouter.delete("/:id", deleteTourHandler)
 
 module.exports = toursRouter

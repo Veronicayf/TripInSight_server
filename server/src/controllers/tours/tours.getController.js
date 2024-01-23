@@ -1,9 +1,15 @@
 const { tour } = require('../../sync/dbConnection'
 )
-const getAllTours = async (req, res) => {
+const getAllTours = async (page, pageSize) => {
+  const offset = (page - 1) * pageSize;
+
+
 
   try {
-    const allTours = await tour.findAll();
+    const allTours = await tour.findAll({
+      limit: Number(pageSize),
+      offset: Number(offset)
+    });
 
     if (allTours.length === 0) {
       throw new Error('no tours to show')
@@ -17,6 +23,5 @@ const getAllTours = async (req, res) => {
 }
 
 module.exports = {
-
   getAllTours
 }

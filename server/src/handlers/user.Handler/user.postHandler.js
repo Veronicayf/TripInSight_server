@@ -16,9 +16,10 @@ const postUserHandler = async (req, res) => {
                 errors: errors.mapped()
             })
         }
+        const newUser = await postUser(auth0Id, name, nationality, image, birthDate, email, admin, phoneNumber);
+        res.status(200).json(newUser);
 
         const newUser = await postUser(auth0Id, name, nationality, image, birthDate, email, admin, phoneNumber);        
-        
         
         return res.status(201).json(newUser);
 
