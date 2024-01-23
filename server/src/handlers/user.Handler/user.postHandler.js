@@ -15,9 +15,7 @@ const postUserHandler = async (req, res) => {
                 ok: false,
                 errors: errors.mapped()
             })
-        }
-        const newUser = await postUser(auth0Id, name, nationality, image, birthDate, email, admin, phoneNumber);
-        res.status(200).json(newUser);
+        }        
 
         const newUser = await postUser(auth0Id, name, nationality, image, birthDate, email, admin, phoneNumber);        
         

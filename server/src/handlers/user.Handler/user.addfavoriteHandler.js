@@ -14,17 +14,15 @@ const addFavoriteHandler = async(req, res) => {
     }
 
     try{
-        
         const {tourId, userId} = req.body;
-    
-        const response = await addFavoriteController(tourId, userId);
 
-        res.json(response);
+        const response = await addFavoriteController(tourId, userId);
+        
+        return res.json(response);
 
     }catch(error){
-
-        res.status(400).json(error);
-
+        
+       return res.status(404).json(error);
     }
 
 }

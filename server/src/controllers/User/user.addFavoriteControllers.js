@@ -1,41 +1,28 @@
 const { user, tour } = require("../../sync/dbConnection");
 
 const addFavoriteController = async(tourId, userId) => {
-    
+        
 
     try{
-
         const foundUser = await user.findByPk(userId);
-        const foundTour = await tour.findByPk(tourId);
+        const tourFounded = await tour.findByPk(tourId);
 
         if(!foundUser) {
-            throw `There is no user with id: ${userId}`;
+            throw  `There is no users with id: ${userId}`;
         }
 
-        if(!foundTour) {
-            throw `There is no user with id: ${tourId}`;
+        if(!tourFounded) {            
+            throw  `There is no tours with id: ${tourId}`;
         }
+                
+        tourFounded.addUser(foundUser.id, { through: 'favorites_tours' });
         
-        const favoritesTours = JSON.parse(foundUser.favorites_tours);
-         
-        console.log(favoritesTours);
-
-        if(favoritesTours.findIndex(favorite => favorite.tourId === tourId) >= 0 ) {
-            throw `The tour with id: ${tourId} exists on favorite list`;
-        }
-
-        const newFavorite = {tourId: tourId};
-    
-        favoritesTours.push(newFavorite);
+        await tourFounded.save();
         
-        foundUser.favorites_tours = JSON.stringify(favoritesTours);
-        await foundUser.save();
+        return {msg: 'The tour was added to the favorites view successfully.'}
         
-        return foundUser;
     }catch(error) {
-        
-        return {error: error}
-
+        return {error: error};
     }
 }
 

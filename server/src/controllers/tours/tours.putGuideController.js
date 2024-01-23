@@ -21,8 +21,8 @@ const putGuideController = async(tourFounded, guideFounded, guideIden) => {
                     }
                 }
             );           
-        } else {
-            console.log('Llego aquí ');
+        } else {            
+
             //? Agrega el id del guia a la tabla tour.
             tourFounded.addGuide(guideFounded);
 
