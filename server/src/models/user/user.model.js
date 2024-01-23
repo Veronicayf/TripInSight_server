@@ -42,6 +42,10 @@ module.exports = (sequelize) => {
         phoneNumber: {
             type: DataTypes.STRING, 
             allowNull: true, 
-        }
+        },
+        favorites_tours: {
+            type: DataTypes.STRING,
+            defaultValue: '[]',
+        }     
     }, { timestamps: false });
 }

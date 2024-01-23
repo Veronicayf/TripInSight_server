@@ -1,6 +1,7 @@
 const { postUser } = require('../../controllers/User/user.postController');
 const { validationResult } = require('express-validator');
 
+
 //* Raul. 
 const postUserHandler = async (req, res) => {
 
@@ -18,7 +19,11 @@ const postUserHandler = async (req, res) => {
         const newUser = await postUser(auth0Id, name, nationality, image, birthDate, email, admin, phoneNumber);
         res.status(200).json(newUser);
 
-    } catch (error) {
+        const newUser = await postUser(auth0Id, name, nationality, image, birthDate, email, admin, phoneNumber);        
+        
+        return res.status(201).json(newUser);
+
+    } catch (error) {        
         res.status(404).json({ error: error.message });
     }
 }

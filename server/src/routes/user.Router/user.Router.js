@@ -7,6 +7,8 @@ const { getUserHandler } = require('../../handlers/user.Handler/user.getHandler'
 const { deleteUserHandler } = require('../../handlers/user.Handler/user.deleteHandler');
 const { getAllUsersHandler } = require('../../handlers/user.Handler/user.getAllUsersHandler');
 const { updateUserHandler } = require('../../handlers/user.Handler/user.updateUserHandler');
+const { addFavoriteHandler } = require('../../handlers/user.Handler/user.addfavoriteHandler');
+const { deleteFavoriteHandler } = require('../../handlers/user.Handler/user.deletefavoriteHandler');
 
 //* Raul.
 const userRouter = Router();
@@ -46,6 +48,20 @@ userRouter.put('/updateuser',
 
 
 userRouter.get("/all", getAllUsersHandler);
+
+userRouter.put("/addfavorite", 
+    [
+        check('tourId', 'idTour must be an uuid format').isUUID(),
+        check('userId', 'userId must be an uuid format').isUUID()
+    ],
+    addFavoriteHandler
+);
+userRouter.put('/addpurchased', [
+    
+]);
+
+
+userRouter.delete('/deletefavoritetour', deleteFavoriteHandler);
 
 userRouter.get("/getuser/:id", 
 
