@@ -12,7 +12,7 @@ const getAllUsersHandler = async (req, res) => {
                 errors: {
                     msg: 'there are no users on database',
                 }
-            });
+            }); 
         }
         
         if(users.errors) {

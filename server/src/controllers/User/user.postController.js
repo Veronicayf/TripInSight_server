@@ -1,9 +1,16 @@
-
+const { sendEmailFunction } = require('../../../../nodemailer/sendEmail');
 const { user } = require('../../sync/dbConnection');
+
 
 const postUser = async (auth0Id, name, nationality, image, birthDate, email, admin, phoneNumber) => {
 		
 	try {
+
+		const foundUser = await user.findOne({where: {email: email}});
+
+		if(foundUser) {
+			return ({msg: `User with: ${email} is on db`});
+		}
 
 		if (name && image && email ) {
 
@@ -17,11 +24,12 @@ const postUser = async (auth0Id, name, nationality, image, birthDate, email, adm
 						email: email,
 						image: image,										
 					}
-				});
-				
+				});		
+
+				await sendEmailFunction(email);
 				return search;
 			}
-
+			
 			const newUser = user.create({				
 				name: name,
 				email: email,
@@ -32,6 +40,8 @@ const postUser = async (auth0Id, name, nationality, image, birthDate, email, adm
 				admin: admin				
 			});
 
+			await sendEmailFunction(email);
+			
 			return newUser;
 		}
 
