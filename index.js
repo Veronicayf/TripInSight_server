@@ -6,10 +6,9 @@ const PORT = 4000
 
 conn.sync({ force: false }).then(() => {  //true=borra todo
 
-
-
     server.listen(PORT, () => {
         console.log(`Sevidor corriendo en puerto: ${PORT}`);
     });
 
-}); 
+});
+
