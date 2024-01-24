@@ -7,11 +7,12 @@ const postUser = async (auth0Id, name, nationality, image, birthDate, email, adm
 
 	try {
 
+		admin = !admin ? admin = false : admin = true;
 
 		const foundUser = await user.findOne({where: {email: email}});
 
 		if(foundUser) {
-			return ({msg: `User with: ${email} is on db`});
+			return (foundUser);
 		}
 
 		if (name && image && email ) {
@@ -40,8 +41,7 @@ const postUser = async (auth0Id, name, nationality, image, birthDate, email, adm
 				nationality,
 				birthDate,
 				phoneNumber,
-				admin: admin,
-				emailSent: false
+				admin: admin			
 			});
 
 			await sendEmailFunction(email);

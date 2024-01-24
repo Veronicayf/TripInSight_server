@@ -2,7 +2,6 @@ const { user, tour } = require("../../sync/dbConnection");
 
 const addPurchasedController = async(tourId, userId) => {
     
-
     // try {
         
     //     const foundUser = await user.findByPk(userId);
