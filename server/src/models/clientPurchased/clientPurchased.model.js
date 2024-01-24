@@ -7,14 +7,6 @@ module.exports = (sequelize) => {
             allowNull: false,
             primaryKey: true,
         },
-        user_id: {
-            type: DataTypes.UUID,
-            allowNull: false,
-            references: {
-                model: 'user',
-                key: 'id'
-            }
-        },
         status: { //COMPRA APROBADA O NO
             type: DataTypes.BOOLEAN,
             allowNull: true
