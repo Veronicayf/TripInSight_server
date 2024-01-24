@@ -10,15 +10,15 @@ module.exports = (sequelize) => {
         },
         auth0Id: {
             type: DataTypes.STRING,
-            allowNull: true,            
+            allowNull: true,
         },
         name: {
             type: DataTypes.STRING,
-            allowNull: false,            
+            allowNull: false,
         },
         nationality: {
             type: DataTypes.STRING,
-            allowNull: true 
+            allowNull: true
         },
         image: {
             type: DataTypes.STRING, //tipo URL buscar
@@ -26,23 +26,27 @@ module.exports = (sequelize) => {
         },
         birthDate: {
             type: DataTypes.STRING, //formato fecha dd/mm/yyyy
-            allowNull: true 
-        },        
+            allowNull: true
+        },
         email: {
             type: DataTypes.STRING,
             allowNull: false,
         },
         admin: {
-            type: DataTypes.BOOLEAN, 
-            defaultValue: false                                   
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         },
         isBanned: {
             type: DataTypes.BOOLEAN,
             defaultValue: false,
         },
         phoneNumber: {
-            type: DataTypes.STRING, 
-            allowNull: true, 
-        }           
+            type: DataTypes.STRING,
+            allowNull: true,
+        },
+        comprados: {
+            type: DataTypes.UUID,
+            allowNull: true,
+        }
     }, { timestamps: false });
 }
