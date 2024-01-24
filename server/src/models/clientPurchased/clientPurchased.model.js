@@ -6,6 +6,7 @@ module.exports = (sequelize) => {
             type: DataTypes.UUID,
             allowNull: false,
             primaryKey: true,
+            defaultValue: DataTypes.UUIDV4
         },
         status: { //COMPRA APROBADA O NO
             type: DataTypes.BOOLEAN,
@@ -14,7 +15,6 @@ module.exports = (sequelize) => {
         detail: {
             type: DataTypes.JSON,
             allowNull: false
-
         },
         totalPrice: {
             type: DataTypes.INTEGER,
