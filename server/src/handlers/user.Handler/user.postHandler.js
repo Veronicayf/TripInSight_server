@@ -16,14 +16,12 @@ const postUserHandler = async (req, res) => {
                 errors: errors.mapped()
             })
         }
-        const newUser = await postUser(auth0Id, name, nationality, image, birthDate, email, admin, phoneNumber);
-        res.status(200).json(newUser);
 
-        const newUser = await postUser(auth0Id, name, nationality, image, birthDate, email, admin, phoneNumber);        
-        
+        const newUser = await postUser(auth0Id, name, nationality, image, birthDate, email, admin, phoneNumber);
+
         return res.status(201).json(newUser);
 
-    } catch (error) {        
+    } catch (error) {
         res.status(404).json({ error: error.message });
     }
 }
