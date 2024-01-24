@@ -1,3 +1,4 @@
+
 const { getAllTours } = require('../../controllers/tours/tours.getController')
 
 const getAllToursHandler = async (req, res) => {
