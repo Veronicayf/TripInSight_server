@@ -33,7 +33,8 @@ module.exports = (sequelize) => {
             allowNull: false,
         },
         admin: {
-            type: DataTypes.BOOLEAN,                                    
+            type: DataTypes.BOOLEAN, 
+            defaultValue: false                                   
         },
         isBanned: {
             type: DataTypes.BOOLEAN,
@@ -42,10 +43,6 @@ module.exports = (sequelize) => {
         phoneNumber: {
             type: DataTypes.STRING, 
             allowNull: true, 
-        },
-        favorites_tours: {
-            type: DataTypes.STRING,
-            defaultValue: '[]',
-        }     
+        }           
     }, { timestamps: false });
 }

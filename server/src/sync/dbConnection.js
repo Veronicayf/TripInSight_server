@@ -3,8 +3,6 @@ const { Sequelize } = require('sequelize');
 const guideModel = require('../models/guide/guide.model');
 const tourModel = require('../models/tour/tour.model');
 const userModel = require('../models/user/user.model');
-const favorites_toursModel = require('../models/favoritesTours/favoritesTours.models');
-const client_purchasedModel = require('../models/clientPurchased/clientPurchased.model');
 
 //? Base de datos desplegada.
 // const sequelize = new Sequelize(process.env.DBNAME, process.env.USER, process.env.PASSWORD, {
@@ -32,26 +30,20 @@ guideModel(sequelize);
 tourModel(sequelize);
 userModel(sequelize);
 
-//? tablas intermedias.
-
-favorites_toursModel(sequelize);
-client_purchasedModel(sequelize);
-
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring.
-const { user, guide, tour, favorites_tours, client_purchased } = sequelize.models;
+const { user, guide, tour } = sequelize.models;
 
 //? referencias a tablas.
 guide.belongsToMany(tour, {through: 'guide_tours', timestamps: false});
 tour.belongsToMany(guide, {through: 'guide_tours', timestamps: false});
 
-favorites_tours.hasMany(user, {
-    foreignKey: 'favorites_tours'
-});
+tour.belongsToMany(user, {through: 'purchased_tours', timestamps: false});
+user.belongsToMany(tour, {through: 'purchased_tours', timestamps: false});
 
-client_purchased.hasMany(user, {
-    foreignKey: 'purchased_tours'
-});
+user.belongsToMany(tour, {through: 'favorites_tours', timestamps: false});
+tour.belongsToMany(user, {through: 'favorites_tours', timestamps: false});
+
 
 guide.hasMany(tour, {
     foreignKey: 'guideId'
@@ -64,8 +56,6 @@ module.exports = {
     conn: sequelize,
     user,
     guide,
-    tour,
-    favorites_tours,
-    client_purchased      
+    tour,             
 };
 

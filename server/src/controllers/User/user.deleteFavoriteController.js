@@ -1,4 +1,4 @@
-const { user, tour } = require("../../sync/dbConnection");
+const { user, tour, model } = require("../../sync/dbConnection");
 
 const deleteFavoriteController = async(tourId, userId) => {
     
@@ -15,21 +15,13 @@ const deleteFavoriteController = async(tourId, userId) => {
             throw `There is no user with id: ${tourId}`;
         }
 
-        const favoritesTours = JSON.parse(foundUser.favorites_tours);    
-                        
-        newListTours = favoritesTours.filter(tour => tour.tourId !== tourId);        
+        await foundUser.removeTour(foundTour);
         
-        foundUser.favorites_tours = JSON.stringify(newListTours);
-        await foundUser.save();
-        
-        return foundUser;
+        return {msg: 'The favorite tour was removed.'};
 
     } catch (error) {
         return {error: error};
     }
-
-
-
 
 }
 
