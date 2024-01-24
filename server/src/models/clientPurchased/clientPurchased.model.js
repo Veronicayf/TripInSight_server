@@ -1,19 +1,33 @@
-const {DataTypes} = require('sequelize');
+const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
-    sequelize.define('client_purchased', {
+    sequelize.define('purchased', {
         id: {
             type: DataTypes.UUID,
             allowNull: false,
-            primaryKey: true,            
+            primaryKey: true,
         },
-        tour_id: {
+        user_id: {
             type: DataTypes.UUID,
             allowNull: false,
             references: {
-                model: 'tours',
+                model: 'user',
                 key: 'id'
             }
-        }
-    },{ timestamps: false })
+        },
+        status: { //COMPRA APROBADA O NO
+            type: DataTypes.BOOLEAN,
+            allowNull: true
+        },
+        detail: {
+            type: DataTypes.JSON,
+            allowNull: false
+
+        },
+        totalPrice: {
+            type: DataTypes.INTEGER,
+            allowNull: false
+        },
+
+    }, { timestamps: false })
 }
