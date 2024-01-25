@@ -9,12 +9,12 @@ const enviarEmail = async () => {
         port: 587,
         secure: false,
         auth: {
-            user: 'maribueno1587@gmail.com',
-            pass: 'mmoxvtyvflzkvqea',
+            user: 'tripinsight.tours@gmail.com',
+            pass: 'mipzpxibnmhsiexm',
         },
     }
     const mensaje = {
-        from: "maribueno1587@gmail.com",
+        from: "tripinsight.tours@gmail.com",
         to: "veronica.araque16@gmail.com", //se toma desde el modelo user
         subject: "correo de prueba 3",
         text: "Envio de correo desde node utilizando nodemailer",

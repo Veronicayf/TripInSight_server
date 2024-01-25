@@ -44,6 +44,11 @@ module.exports = (sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
+        subscription: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            defaultValue: 0
+        },
         places: {
             type: DataTypes.INTEGER,
             allowNull: true,
