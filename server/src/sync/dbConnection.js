@@ -6,11 +6,11 @@ const userModel = require('../models/user/user.model');
 const purchasedModel = require('../models/clientPurchased/clientPurchased.model')
 
 //? Base de datos desplegada.
-// const sequelize = new Sequelize(process.env.DBNAME, process.env.USER, process.env.PASSWORD, {
-//     host: process.env.HOST,
-//     dialect: 'mysql',
-//     port: process.env.DBPORT
-// });
+const sequelize = new Sequelize(process.env.DBNAME, process.env.USER, process.env.PASSWORD, {
+    host: process.env.HOST,
+    dialect: 'mysql',
+    port: process.env.DBPORT
+});
 
 //? Para uso de mi base de datos local
 // const sequelize = new Sequelize('tripinsight', 'root', 'hola1234', {
@@ -21,11 +21,11 @@ const purchasedModel = require('../models/clientPurchased/clientPurchased.model'
 
 
 //base de datos local con variables en el .env
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-    host: process.env.DB_HOST,
-    dialect: 'mysql',
-    logging: false,
-});
+// const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+//     host: process.env.DB_HOST,
+//     dialect: 'mysql',
+//     logging: false,
+// });
 
 guideModel(sequelize);
 tourModel(sequelize);
