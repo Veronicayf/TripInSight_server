@@ -3,7 +3,7 @@ const { Sequelize } = require('sequelize');
 const guideModel = require('../models/guide/guide.model');
 const tourModel = require('../models/tour/tour.model');
 const userModel = require('../models/user/user.model');
-const purchasedModel = require('../models/clientPurchased/clientPurchased.model')
+const purchasedModel = require('../models/clientPurchased/clientPurchased.model');
 
 //? Base de datos desplegada.
 // const sequelize = new Sequelize(process.env.DBNAME, process.env.USER, process.env.PASSWORD, {
@@ -46,8 +46,8 @@ tour.belongsToMany(guide, { through: 'guide_tours', timestamps: false });
 user.belongsToMany(tour, { through: 'favorites_tours', timestamps: false });
 tour.belongsToMany(user, { through: 'favorites_tours', timestamps: false });
 
-purchased.hasMany(user, { foreignKey: 'comprados' })
-user.belongsTo(purchased, { foreignKey: 'comprados' })
+purchased.hasMany(user, { foreignKey: 'comprados' });
+user.belongsTo(purchased, { foreignKey: 'comprados' });
 // Project.hasMany(Task, { foreignKey: 'tasks_pk' });
 // Task.belongsTo(Project, { foreignKey: 'tasks_pk' });
 
@@ -55,6 +55,8 @@ user.belongsTo(purchased, { foreignKey: 'comprados' })
 guide.hasMany(tour, {
     foreignKey: 'guideId'
 })
+
+
 
 const { models } = sequelize;
 module.exports = {

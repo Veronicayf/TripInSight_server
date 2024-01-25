@@ -10,7 +10,9 @@ const { updateUserHandler } = require('../../handlers/user.Handler/user.updateUs
 const { addFavoriteHandler } = require('../../handlers/user.Handler/user.addfavoriteHandler');
 const { deleteFavoriteHandler } = require('../../handlers/user.Handler/user.deletefavoriteHandler');
 const { addPurchasedHandler } = require('../../handlers/user.Handler/user.purchasedHandler');
+
 // const { addPurchasedHandler } = require('../../handlers/user.Handler/user.addPurchasedHandler');
+
 
 //* Raul.
 const userRouter = Router();
