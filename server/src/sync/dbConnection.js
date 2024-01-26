@@ -40,8 +40,8 @@ const { user, guide, tour, purchased } = sequelize.models;
 guide.belongsToMany(tour, { through: 'guide_tours', timestamps: false });
 tour.belongsToMany(guide, { through: 'guide_tours', timestamps: false });
 
-// tour.belongsToMany(user, { through: 'purchased_tours', timestamps: false });
-// user.belongsToMany(tour, { through: 'purchased_tours', timestamps: false });
+tour.belongsToMany(user, { through: 'purchased_tours', timestamps: false });
+user.belongsToMany(tour, { through: 'purchased_tours', timestamps: false });
 
 user.belongsToMany(tour, { through: 'favorites_tours', timestamps: false });
 tour.belongsToMany(user, { through: 'favorites_tours', timestamps: false });

@@ -7,6 +7,7 @@ const { getUserHandler } = require('../../handlers/user.Handler/user.getHandler'
 const { deleteUserHandler } = require('../../handlers/user.Handler/user.deleteHandler');
 const { getAllUsersHandler } = require('../../handlers/user.Handler/user.getAllUsersHandler');
 const { updateUserHandler } = require('../../handlers/user.Handler/user.updateUserHandler');
+const { getAllFavsHandler } = require('../../handlers/user.Handler/user.getAllFavsHandler');
 const { addFavoriteHandler } = require('../../handlers/user.Handler/user.addfavoriteHandler');
 const { deleteFavoriteHandler } = require('../../handlers/user.Handler/user.deletefavoriteHandler');
 const { addPurchasedHandler } = require('../../handlers/user.Handler/user.addPurchasedHandler');
@@ -49,6 +50,7 @@ userRouter.put('/updateuser',
 
 userRouter.get("/all", getAllUsersHandler);
 
+userRouter.get("/allfavs", getAllFavsHandler)
 
 userRouter.put("/addfavorite", 
     [
