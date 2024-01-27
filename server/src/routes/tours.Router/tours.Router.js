@@ -8,6 +8,7 @@ const { getToursHandler } = require('../../handlers/tours.Handler/tours.getByIdH
 const { getToursByNameHandler } = require('../../handlers/tours.Handler/tours.getByNameHandler')
 const { getContinentHandler } = require('../../handlers/tours.Handler/tours.getByContinentHandler')
 const { tagsHandler } = require('../../handlers/tours.Handler/tours.getTagsHandler')
+const { purchasedTourHandler } = require('../../handlers/tours.Handler/tours.putPurchasedHandler')
 
 // const { getToursByTypeHandler } = require()
 // const { getToursByPriceHandler } = require()
@@ -47,6 +48,14 @@ toursRouter.post("/", [
     check('guide', 'Guide input has to be uuid format').optional().isUUID(),
 ], postToursHandler)
 
+toursRouter.put("/purchasedTour",
+    [
+        check('tourId', 'tourId has to be a UUID format').isUUID(),
+        check('stock', 'stock has to be a number').isNumeric(),
+        check('stock', 'stock can not be float').isInt()
+    ],
+    purchasedTourHandler
+);
 toursRouter.put('/:id', putToursHandler)
 toursRouter.put('/postguidetour', putGuideTourHandler);
 toursRouter.get("/", getAllToursHandler)
