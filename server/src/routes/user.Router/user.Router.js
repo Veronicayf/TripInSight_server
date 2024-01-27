@@ -9,7 +9,10 @@ const { getAllUsersHandler } = require('../../handlers/user.Handler/user.getAllU
 const { updateUserHandler } = require('../../handlers/user.Handler/user.updateUserHandler');
 const { addFavoriteHandler } = require('../../handlers/user.Handler/user.addfavoriteHandler');
 const { deleteFavoriteHandler } = require('../../handlers/user.Handler/user.deletefavoriteHandler');
-const { addPurchasedHandler } = require('../../handlers/user.Handler/user.addPurchasedHandler');
+const { addPurchasedHandler } = require('../../handlers/user.Handler/user.purchasedHandler');
+
+// const { addPurchasedHandler } = require('../../handlers/user.Handler/user.addPurchasedHandler');
+
 
 //* Raul.
 const userRouter = Router();
@@ -92,5 +95,7 @@ userRouter.delete("/:id",
     ],
     deleteUserHandler
 );
+
+userRouter.post("/postpurchased", addPurchasedHandler);
 
 module.exports = userRouter;
