@@ -1,11 +1,9 @@
 require('dotenv').config();
-const { Sequelize, DataTypes } = require('sequelize');
+const { Sequelize } = require('sequelize');
 const guideModel = require('../models/guide/guide.model');
 const tourModel = require('../models/tour/tour.model');
 const userModel = require('../models/user/user.model');
-const favorites_toursModel = require('../models/favoritesTours/favoritesTours.models');
-const client_purchasedModel = require('../models/clientPurchased/clientPurchased.model');
-const guide_toursModel = require('../models/guideTours/guideTours.model');
+const purchasedModel = require('../models/clientPurchased/clientPurchased.model')
 
 //? Base de datos desplegada.
 // const sequelize = new Sequelize(process.env.DBNAME, process.env.USER, process.env.PASSWORD, {
@@ -21,6 +19,7 @@ const guide_toursModel = require('../models/guideTours/guideTours.model');
 //     logging: false,
 // });
 
+
 //base de datos local con variables en el .env
 const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
     host: process.env.DB_HOST,
@@ -31,41 +30,40 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 guideModel(sequelize);
 tourModel(sequelize);
 userModel(sequelize);
-
-//tablas intermedias.
-favorites_toursModel(sequelize);
-client_purchasedModel(sequelize);
-guide_toursModel(sequelize);
-
+purchasedModel(sequelize);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring.
-const { user, guide, tour, favorites_tours, client_purchased, guide_tours } = sequelize.models;
+const { user, guide, tour, purchased } = sequelize.models;
 
-favorites_tours.hasMany(user, {
-    foreignKey: 'favorites_tours'
-});
+//? referencias a tablas.
+guide.belongsToMany(tour, { through: 'guide_tours', timestamps: false });
+tour.belongsToMany(guide, { through: 'guide_tours', timestamps: false });
 
-client_purchased.hasMany(user, {
-    foreignKey: 'purchased_tours'
-});
+// tour.belongsToMany(user, { through: 'purchased_tours', timestamps: false });
+// user.belongsToMany(tour, { through: 'purchased_tours', timestamps: false });
 
-guide_tours.hasMany(guide, {
-    foreignKey: 'guide_tours'
-});
+user.belongsToMany(tour, { through: 'favorites_tours', timestamps: false });
+tour.belongsToMany(user, { through: 'favorites_tours', timestamps: false });
+
+purchased.hasMany(user, { foreignKey: 'comprados' })
+user.belongsTo(purchased, { foreignKey: 'comprados' })
+// Project.hasMany(Task, { foreignKey: 'tasks_pk' });
+// Task.belongsTo(Project, { foreignKey: 'tasks_pk' });
+
 
 guide.hasMany(tour, {
-   foreignKey: 'guide' 
-});
+    foreignKey: 'guideId'
+})
 
+const { models } = sequelize;
 module.exports = {
     ...sequelize.model,
+    models,
     conn: sequelize,
     user,
     guide,
     tour,
-    favorites_tours,
-    client_purchased,
-    guide_tours
+    purchased,
 };
 

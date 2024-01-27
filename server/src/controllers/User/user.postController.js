@@ -1,33 +1,59 @@
 
+const { sendEmailFunction } = require('../../../../nodemailer/sendEmail');
 const { user } = require('../../sync/dbConnection');
 
-const postUser = async (  forename, surname, nationality, image, birthDate, email, password, phoneNumber  ) =>{
 
-  try {
-    
-    if (forename && surname && nationality && image && birthDate && email && password && phoneNumber) {
-            
-      const newUser = await user.create({
-        forename,
-        surname,
-        nationality,
-        image,
-        birthDate,
-        email,
-        password,
-        phoneNumber,
-      });
-      
-      return newUser;  
-    }
-       
-    return newUser;
+const postUser = async (auth0Id, name, nationality, image, birthDate, email, admin, phoneNumber) => {
 
-  } catch (error) {
-    
-    throw error;      
-  }
-  
-}       
+	try {
+
+		admin = !admin ? admin = false : admin = true;
+
+		const foundUser = await user.findOne({where: {email: email}});
+
+		if(foundUser) {
+			return (foundUser);
+		}
+
+		if (name && image && email ) {
+
+			if (auth0Id) { //Registra un usuario que venga de google.
+
+				const [search, created] = await user.findOrCreate({
+					where: { auth0Id: auth0Id },
+					defaults: {
+						auth0Id: auth0Id,
+						name: name,
+						email: email,
+						image: image,
+					}
+				});		
+
+				await sendEmailFunction(email);
+				return search;
+			}
+			
+			const newUser = user.create({				
+
+				name: name,
+				email: email,
+				image: image,
+				nationality,
+				birthDate,
+				phoneNumber,
+				admin: admin			
+			});
+
+			await sendEmailFunction(email);
+		
+			return newUser;
+		}
+
+	} catch (error) {
+
+		throw error;
+	}
+
+}
 
 module.exports = { postUser }

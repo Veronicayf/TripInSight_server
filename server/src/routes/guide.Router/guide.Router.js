@@ -22,21 +22,48 @@ guideRouter.post("/",
 
         check('nationality', 'Invalid nationality format').not().isEmpty().isString(),
 
+        check('image', 'Image must be an url').optional().isURL(),
+
         check('birthDate', 'Invalid birthdate format').not().isEmpty().isISO8601(),
         
         check('biography', 'Invalid biography format').not().isEmpty().isString(),
 
        ],
            postGuideHandler)
-guideRouter.put("/", putGuideHandler)
+guideRouter.put("/updateguide",
+      
+       [
+        check('Id', 'Id must be an uuid format').isUUID(),
+
+        check('forename', 'Name should be string').optional().isString(),
+     
+        check('surname', 'LastName should be a date').optional().isString(),
+
+        check('nationality', 'Country should be string').optional().isString(),
+        
+        check('image', 'Image number should be an url').optional().isURL(),
+
+        check('birthDate', 'birthDate should be a date').optional().isISO8601(),
+
+        check('biography', 'Bio should be string').optional().isString()
+       ],
+
+         putGuideHandler)
 guideRouter.get("/", getAllGuideHandler)
 
 guideRouter.get("/:id",
+    
      [
       check('id', 'invalid id format').not().isEmpty().isUUID()
      ],
 getGuideHandler)
-/guideRouter.delete("/:id", deleteGuideHandler)
+
+guideRouter.delete("/:id",
+    
+     [
+     check('id', 'invalid id format').not().isEmpty().isUUID()
+     ],
+       deleteGuideHandler)
 
 
 module.exports = guideRouter

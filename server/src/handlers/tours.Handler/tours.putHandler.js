@@ -1,20 +1,21 @@
-const { putTours } = require('../../controllers/tours/tours.putController')
+const { putTours } = require('../../controllers/tours/tours.putController');
 
 const putToursHandler = async (req, res) => {
-
-    const { name, lastname, email, birthdate, nationality, phone } = req.body
+    const { id } = req.params;
+    const tourData = req.body;
 
     try {
-        const user = await putTours( name, lastname, email, birthdate, nationality, phone )
+        const updateTour = await putTours(id, tourData);
+        res.status(200).json(updateTour)
 
-        res.status(200).json(user)
-        
+
     } catch (error) {
-        res.status(404).json({error: error.message})
+        console.error('Error updating tour:', error);
+
+        if (error.message === 'Tour not found') {
+            return res.status(404).json({ message: 'internal sever error' })
+        }
     }
-}
+};
 
-
-module.exports = {
-    putToursHandler,
-}
+module.exports = { putToursHandler };

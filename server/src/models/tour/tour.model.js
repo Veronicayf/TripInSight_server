@@ -44,6 +44,15 @@ module.exports = (sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
+        subscription: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            defaultValue: 0
+        },
+        places: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        },
         description: {
             type: DataTypes.TEXT,
             allowNull: false
@@ -64,6 +73,13 @@ module.exports = (sequelize) => {
             type: DataTypes.TEXT,
             allowNull: false
         },
-        //Agregar rating- 1...5
+        tags: { //se agrego nueva propiedad
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        photos: {
+            type: DataTypes.JSON,
+            allowNull: false
+        }
     }, { timestamps: false });
 }
