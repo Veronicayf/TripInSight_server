@@ -1,12 +1,12 @@
 const { postUser } = require('../../controllers/User/user.postController');
 const { validationResult } = require('express-validator');
+const { loadToursToDb } = require('../../sync/syncModelsToDb');
 
 
 //* Raul. 
 const postUserHandler = async (req, res) => {
 
-    const { auth0Id, name, nationality, image, birthDate, email, phoneNumber, admin } = req.body;
-
+    const { auth0Id, name, nationality, image, birthDate, email, phoneNumber, admin } = req.body;    
     try {
 
         const errors = validationResult(req);
