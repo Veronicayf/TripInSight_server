@@ -37,25 +37,17 @@ purchasedModel(sequelize);
 const { user, guide, tour, purchased } = sequelize.models;
 
 //? referencias a tablas.
+tour.belongsTo(guide, {
+    foreignKey: 'guideId'
+});
 guide.belongsToMany(tour, { through: 'guide_tours', timestamps: false });
 tour.belongsToMany(guide, { through: 'guide_tours', timestamps: false });
-
-// tour.belongsToMany(user, { through: 'purchased_tours', timestamps: false });
-// user.belongsToMany(tour, { through: 'purchased_tours', timestamps: false });
 
 user.belongsToMany(tour, { through: 'favorites_tours', timestamps: false });
 tour.belongsToMany(user, { through: 'favorites_tours', timestamps: false });
 
-purchased.hasMany(user, { foreignKey: 'comprados' });
-user.belongsTo(purchased, { foreignKey: 'comprados' });
-// Project.hasMany(Task, { foreignKey: 'tasks_pk' });
-// Task.belongsTo(Project, { foreignKey: 'tasks_pk' });
-
-
-guide.hasMany(tour, {
-    foreignKey: 'guideId'
-})
-
+purchased.belongsTo(tour, {foreignKey: 'tourId'});
+purchased.belongsTo(user, {foreignKey: 'userId'});
 
 
 const { models } = sequelize;
@@ -68,4 +60,3 @@ module.exports = {
     tour,
     purchased,
 };
-
