@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 
-const { reviewTourHandler } = require('../../handlers/user.Handler/user.postReviewTourHandler');
+const { reviewTourHandler } = require('../../handlers/reviews.Handler/reviews.postHandler');
 
 const reviewsRouter = Router();
 
@@ -12,4 +12,6 @@ reviewsRouter.post("/",
         check('idTour', 'The Tour id must be UUID format').isUUID().not().isEmpty(),
         check('review', 'The review ust be a not empty string' ).not().isEmpty().isString()
     ],
-reviewTourHandler);
+    reviewTourHandler);
+
+module.exports =  reviewsRouter 
