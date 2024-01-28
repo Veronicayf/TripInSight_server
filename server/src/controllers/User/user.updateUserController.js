@@ -1,6 +1,6 @@
 const { user } = require("../../sync/dbConnection");
 
-const updateUserController = async (nationality, birthDate, phoneNumber, admin, isBanned, idUser) => {    
+const updateUserController = async (nationality, birthDate, phoneNumber, admin, isBanned, idUser, image) => {    
 
     try{
         
@@ -28,13 +28,13 @@ const updateUserController = async (nationality, birthDate, phoneNumber, admin, 
             findUser.nationality = nationality;
             findUser.admin = admin;
             findUser.isBanned = isBanned;
+            findUser.image = image,
             await findUser.save();
                         
             return findUser;
         }
 
-    } catch(error) {  
-        
+    } catch(error) {          
         return {error: error}
     }
 

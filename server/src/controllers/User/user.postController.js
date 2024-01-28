@@ -5,8 +5,7 @@ const { user } = require('../../sync/dbConnection');
 
 const postUser = async (auth0Id, name, nationality, image, birthDate, email, admin, phoneNumber) => {
 
-	try {
-
+	try {		
 		admin = !admin ? admin = false : admin = true;
 
 		const foundUser = await user.findOne({where: {email: email}});
@@ -51,7 +50,7 @@ const postUser = async (auth0Id, name, nationality, image, birthDate, email, adm
 
 	} catch (error) {
 
-		throw error;
+		return {error: error};
 	}
 
 }

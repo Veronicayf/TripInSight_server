@@ -2,17 +2,12 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 
 const { postUserHandler } = require('../../handlers/user.Handler/user.postHandler');
-const { putUserHandler } = require('../../handlers/user.Handler/user.putHandler');
 const { getUserHandler } = require('../../handlers/user.Handler/user.getHandler');
 const { deleteUserHandler } = require('../../handlers/user.Handler/user.deleteHandler');
 const { getAllUsersHandler } = require('../../handlers/user.Handler/user.getAllUsersHandler');
 const { updateUserHandler } = require('../../handlers/user.Handler/user.updateUserHandler');
 const { addFavoriteHandler } = require('../../handlers/user.Handler/user.addfavoriteHandler');
 const { deleteFavoriteHandler } = require('../../handlers/user.Handler/user.deletefavoriteHandler');
-const { addPurchasedHandler } = require('../../handlers/user.Handler/user.purchasedHandler');
-
-// const { addPurchasedHandler } = require('../../handlers/user.Handler/user.addPurchasedHandler');
-
 
 //* Raul.
 const userRouter = Router();
@@ -46,9 +41,11 @@ userRouter.put('/updateuser',
         check('birthDate', 'birthDate should be a date').optional().isISO8601(),
 
         check('phoneNumber', 'Phone number must be string').optional().isString(),
+
+        check('image', 'image must be an url').isURL().optional()
     ],
     updateUserHandler
-)
+);
 
 userRouter.get("/all", getAllUsersHandler);
 
@@ -62,17 +59,6 @@ userRouter.put("/addfavorite",
 );
 userRouter.delete('/deletefavoritetour', deleteFavoriteHandler);
 
-
-userRouter.put('/addpurchased', 
-    [
-        check('tourId', 'idTour must be an uuid format').isUUID(),
-        check('userId', 'userId must be an uuid format').isUUID()
-    ],
-    addPurchasedHandler
-);
-
-
-
 userRouter.get("/getuser/:id", 
 
     [
@@ -81,12 +67,6 @@ userRouter.get("/getuser/:id",
     getUserHandler
 );
 
-userRouter.put("/",
-    [
-        check('id', 'id must be UUID format').isUUID(),                  
-    ],
-    putUserHandler
-);
     
 
 userRouter.delete("/:id", 
@@ -95,7 +75,5 @@ userRouter.delete("/:id",
     ],
     deleteUserHandler
 );
-
-userRouter.post("/postpurchased", addPurchasedHandler);
 
 module.exports = userRouter;
