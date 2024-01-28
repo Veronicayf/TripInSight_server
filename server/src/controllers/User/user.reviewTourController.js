@@ -31,7 +31,14 @@ const reviewTour = async(idUser, idTour, review)=> {
                 }
             }
         })
+          
+        const newReview = review.create({
 
+            //faltan las props
+            
+        })
+
+        return newReview
 
     } catch (error) {
         throw error
