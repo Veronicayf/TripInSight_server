@@ -1,4 +1,4 @@
-const { user, tour, models } = require("../../sync/dbConnection");
+const { user, models } = require("../../sync/dbConnection");
 
 const getAllFavs = async(id)=> {
 
@@ -16,13 +16,9 @@ const getAllFavs = async(id)=> {
                 }
             }
         })
-
+    
         const allFavs = await models.favorites_tours.findAll({
           where: { userId: id },
-          // include: [{
-          //   model: tour,
-          //   //attributes: ['id'], 
-          // }],
         });
         return allFavs;
       } catch (error) {
@@ -32,3 +28,4 @@ const getAllFavs = async(id)=> {
 
 
 module.exports = { getAllFavs }
+

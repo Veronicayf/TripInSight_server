@@ -1,4 +1,5 @@
-const { getAllFavs } = require("../../controllers/User/user.getAllFavsController");
+const { getAllFavs } = require("../../controllers/User/user.addFavoriteControllers");
+//const { validationResult } = require('express-validator');
 
 //const { validationResult } = require('express-validator');
 

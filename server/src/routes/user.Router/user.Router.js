@@ -73,8 +73,6 @@ userRouter.put('/addpurchased',
     addPurchasedHandler
 );
 
-
-
 userRouter.get("/getuser/:id", 
 
     [
@@ -99,5 +97,6 @@ userRouter.delete("/:id",
 );
 
 userRouter.post("/postpurchased", addPurchasedHandler);
+
 
 module.exports = userRouter;
