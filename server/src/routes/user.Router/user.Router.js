@@ -53,7 +53,7 @@ userRouter.put('/updateuser',
 
 userRouter.get("/all", getAllUsersHandler);
 
-userRouter.get("/allfavs", getAllFavsHandler)
+userRouter.get("/allfavs/:id", getAllFavsHandler)
 
 userRouter.put("/addfavorite", 
     [

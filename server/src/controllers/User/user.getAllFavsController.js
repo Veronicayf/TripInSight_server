@@ -1,9 +1,8 @@
-const { user, tour, favorites_tours } = require("../../sync/dbConnection");
+const { user, tour, models } = require("../../sync/dbConnection");
 
 const getAllFavs = async(id)=> {
 
-    try {
-        
+  try {
         const allFavsUser = await user.findByPk(id);
     
         if (!allFavsUser) return ({
@@ -17,20 +16,16 @@ const getAllFavs = async(id)=> {
                 }
             }
         })
-    
-        const allFavs = await favorites_tours.findAll({
-          where: { id: id },
-          include: [{
-            model: tour,
-            attributes: ['id', 'nameTour', "initialDate", 'endDate', 'image', 'continent', 'country', 'city', 
-        'type', 'capacity', 'subscription', 'places', 'description', 'season', 'status', 'price', 'equipment', 
-    'tags', 'photos' ], 
-          }],
+
+        const allFavs = await models.favorites_tours.findAll({
+          where: { userId: id },
+          // include: [{
+          //   model: tour,
+          //   //attributes: ['id'], 
+          // }],
         });
-    
         return allFavs;
       } catch (error) {
-      
         throw error;
       }
     }
