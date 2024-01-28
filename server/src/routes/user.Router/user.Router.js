@@ -2,6 +2,7 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 
 const { postUserHandler } = require('../../handlers/user.Handler/user.postHandler');
+const { reviewTourHandler } = require('../../handlers/user.Handler/user.postReviewTourHandler');
 const { putUserHandler } = require('../../handlers/user.Handler/user.putHandler');
 const { getUserHandler } = require('../../handlers/user.Handler/user.getHandler');
 const { deleteUserHandler } = require('../../handlers/user.Handler/user.deleteHandler');
@@ -97,5 +98,13 @@ userRouter.delete("/:id",
 );
 
 userRouter.post("/postpurchased", addPurchasedHandler);
+
+userRouter.post("/review", 
+    [
+        check('idUser', 'The user id must be UUID format').isUUID().not().isEmpty(),
+        check('idTour', 'The Tour id must be UUID format').isUUID().not().isEmpty(),
+        check('review', 'The review ust be a not empty string' ).not().isEmpty().isString()
+    ],
+reviewTourHandler);
 
 module.exports = userRouter;
