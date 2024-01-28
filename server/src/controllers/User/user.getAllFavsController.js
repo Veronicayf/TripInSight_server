@@ -32,6 +32,3 @@ const getAllFavs = async(id)=> {
 
 
 module.exports = { getAllFavs }
-
-// name
-// email
