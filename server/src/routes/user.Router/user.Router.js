@@ -10,7 +10,10 @@ const { updateUserHandler } = require('../../handlers/user.Handler/user.updateUs
 const { getAllFavsHandler } = require('../../handlers/user.Handler/user.getAllFavsHandler');
 const { addFavoriteHandler } = require('../../handlers/user.Handler/user.addfavoriteHandler');
 const { deleteFavoriteHandler } = require('../../handlers/user.Handler/user.deletefavoriteHandler');
-const { addPurchasedHandler } = require('../../handlers/user.Handler/user.addPurchasedHandler');
+const { addPurchasedHandler } = require('../../handlers/user.Handler/user.purchasedHandler');
+
+// const { addPurchasedHandler } = require('../../handlers/user.Handler/user.addPurchasedHandler');
+
 
 //* Raul.
 const userRouter = Router();
@@ -50,7 +53,7 @@ userRouter.put('/updateuser',
 
 userRouter.get("/all", getAllUsersHandler);
 
-userRouter.get("/allfavs", getAllFavsHandler)
+userRouter.get("/allfavs/:id", getAllFavsHandler)
 
 userRouter.put("/addfavorite", 
     [
@@ -94,5 +97,7 @@ userRouter.delete("/:id",
     ],
     deleteUserHandler
 );
+
+userRouter.post("/postpurchased", addPurchasedHandler);
 
 module.exports = userRouter;

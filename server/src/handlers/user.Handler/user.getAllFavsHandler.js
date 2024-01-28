@@ -1,5 +1,5 @@
-const { getAllFavsController } = require("../../controllers/User/user.addFavoriteControllers");
-const { validationResult } = require('express-validator');
+const { getAllFavs } = require("../../controllers/User/user.addFavoriteControllers");
+//const { validationResult } = require('express-validator');
 
 
 const getAllFavsHandler = async (req,res) => {

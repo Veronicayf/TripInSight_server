@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize')
+const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
     sequelize.define('tour', {
@@ -80,6 +80,13 @@ module.exports = (sequelize) => {
         photos: {
             type: DataTypes.JSON,
             allowNull: false
+        }, 
+        guideId: {
+            type: DataTypes.UUID,
+            references: {
+                model: 'guides',
+                key: 'id'
+            }
         }
     }, { timestamps: false });
 }
