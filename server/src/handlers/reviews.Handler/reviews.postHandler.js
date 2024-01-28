@@ -1,6 +1,5 @@
-const { reviewTour } = require('../../controllers/User/user.reviewTourController')
-const { validationResult } = require('express-validator');
-
+const { reviewTour } = require('../../controllers/reviews/reviews.postController')
+const { validationResult } = require('express-validator')
 
 const reviewTourHandler = async(req,res) => {
 

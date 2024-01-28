@@ -1,10 +1,10 @@
-const { user,tour } = require('../../sync/dbConnection')
+const { user,tour, review } = require('../../sync/dbConnection')
 
 const reviewTour = async(idUser, idTour, review)=> {
 
     try {
        
-        const user = await user.findByPk(idUser);   
+        const findUser = await user.findByPk(idUser);   
 
         if (!user) return ({
             errors: {
@@ -18,7 +18,7 @@ const reviewTour = async(idUser, idTour, review)=> {
             }
         })
 
-        const tour = await tour.findByPk(idTour);   
+        const findTour = await tour.findByPk(idTour);   
 
         if (!tour) return ({
             errors: {
@@ -47,4 +47,5 @@ const reviewTour = async(idUser, idTour, review)=> {
     }
 }
 
-module.exports = { reviewTour }
+
+module.exports={  reviewTour } 
