@@ -1,21 +1,15 @@
 const { Router } = require('express')
-const { postToursHandler } = require('../../handlers/tours.Handler/tours.postHandler')
 const { check } = require('express-validator')
 
 
+const { postToursHandler } = require('../../handlers/tours.Handler/tours.postHandler')
 const { getAllToursHandler } = require('../../handlers/tours.Handler/tours.getHandler')
 const { getToursHandler } = require('../../handlers/tours.Handler/tours.getByIdHandler')
 const { getToursByNameHandler } = require('../../handlers/tours.Handler/tours.getByNameHandler')
 const { getContinentHandler } = require('../../handlers/tours.Handler/tours.getByContinentHandler')
 const { tagsHandler } = require('../../handlers/tours.Handler/tours.getTagsHandler')
 const { purchasedTourHandler } = require('../../handlers/tours.Handler/tours.putPurchasedHandler')
-
-// const { getToursByTypeHandler } = require()
-// const { getToursByPriceHandler } = require()
-// const { getToursByGuideHandler } = require()
-// const { getToursByCountryHandler } = require()
 const { putToursHandler } = require('../../handlers/tours.Handler/tours.putHandler')
-
 const { deleteTourHandler } = require('../../handlers/tours.Handler/tours.deleteHandler')
 const { putGuideTourHandler } = require('../../handlers/tours.Handler/tours.putGuideTour')
 
@@ -61,12 +55,6 @@ toursRouter.put('/postguidetour', putGuideTourHandler);
 toursRouter.get("/", getAllToursHandler)
 toursRouter.get("/nameTour", getToursByNameHandler)
 toursRouter.get("/:id", getToursHandler)
-
-
-// toursRouter.get("/", getToursByTypeHandler)
-// toursRouter.get("/", getToursByPriceHandler)
-// toursRouter.get("/", getToursByCountryHandler) 
-// toursRouter.get("/", getToursByGuideHandler)
 toursRouter.delete("/:id", deleteTourHandler)
 
 module.exports = toursRouter

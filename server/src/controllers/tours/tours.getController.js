@@ -1,9 +1,7 @@
-const { tour } = require('../../sync/dbConnection'
-)
+const { tour } = require('../../sync/dbConnection');
+
 const getAllTours = async (page, pageSize) => {
   const offset = (page - 1) * pageSize;
-
-
 
   try {
     const allTours = await tour.findAll({
