@@ -17,7 +17,7 @@ try {
         })
     }
 
-      if (guide.errors) return res.status(400).json(users)
+      if (guide.errors) return res.status(400).json(guide)
        res.status(200).json(guide)
     
 } catch (error) {

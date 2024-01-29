@@ -1,4 +1,4 @@
-const { user,tour, review } = require('../../sync/dbConnection')
+const { user,tour, reviews, purchased } = require('../../sync/dbConnection')
 
 const reviewTour = async(idUser, idTour, review)=> {
 
@@ -6,7 +6,7 @@ const reviewTour = async(idUser, idTour, review)=> {
        
         const findUser = await user.findByPk(idUser);   
 
-        if (!user) return ({
+        if (!findUser) return ({
             errors: {
                 page: {
                     type: "body",
@@ -20,7 +20,7 @@ const reviewTour = async(idUser, idTour, review)=> {
 
         const findTour = await tour.findByPk(idTour);   
 
-        if (!tour) return ({
+        if (!findTour) return ({
             errors: {
                 page: {
                     type: "body",
@@ -32,12 +32,30 @@ const reviewTour = async(idUser, idTour, review)=> {
             }
         })
           
-        const newReview = review.create({
+        const userTour = await purchased.findOne(
+            {where:{ 
+                userId:idUser,
+                tourId:idTour
+            }
+            })
 
-            //falta saber si los comentarios van en un modelo nuevo o actualizan alguno anterior
-            // en caso de actualizar uno, habria que modificar la ruta y que sea un put en lugar de 
-            //un post 
+        if (!userTour )return ({
+            errors: {
+                page: {
+                    type: "body",
+                    value: "id",
+                    msg: `the user with the id ${idUser} has not purchased the tour with the id ${idTour}` ,
+                    path: "id",
+                    location: "body"
+                }
+            }
+        })
+        
 
+        const newReview = reviews.create({
+            tourId: idTour,
+            userId: idUser,
+            review: review
         })
 
         return newReview
