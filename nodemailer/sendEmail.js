@@ -1,15 +1,16 @@
 const nodemailer = require('nodemailer');
+require('dotenv').config()
 
 const sendEmailFunction = async (email, name) => {
 
     const transporter = nodemailer.createTransport({
 
-        host: 'smtp.gmail.com',
-        port: 587,
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT,
         secure: false,
         auth: {
-            user: 'tripinsight.tours@gmail.com',
-            pass: 'mipzpxibnmhsiexm',
+            user: process.env.SMTP_USER,
+            pass: process.env.SMTP_PASS,
         },
     });
 
@@ -25,12 +26,12 @@ const sendEmailFunction = async (email, name) => {
 
 const subscriptionEmail = async (email) => {
     const transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 587,
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT,
         secure: false,
         auth: {
-            user: 'tripinsight.tours@gmail.com',
-            pass: 'mipzpxibnmhsiexm',
+            user: process.env.SMTP_USER,
+            pass: process.env.SMTP_PASS,
         },
     });
 
