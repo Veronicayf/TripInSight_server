@@ -1,18 +1,18 @@
 const { user, tour, purchased } = require("../../sync/dbConnection");
 
-const purchasedPostController = async(tourId, userId, initialDate, tickets, equipment, status, detail, totalPrice) => {
-    
+const purchasedPostController = async (tourId, userId, initialDate, tickets, equipment, status, detail, totalPrice) => {
+
     try {
-        
+
         const foundUser = await user.findByPk(userId);
-    
-        if(!foundUser) {
+
+        if (!foundUser) {
             throw `Any user have id: ${userId}`
         }
-    
+
         const foundTour = await tour.findByPk(tourId);
-    
-        if(!foundTour) {
+
+        if (!foundTour) {
             throw `Any tour have id: ${tourId}`
         }
 
@@ -20,20 +20,20 @@ const purchasedPostController = async(tourId, userId, initialDate, tickets, equi
             tourId,
             tourName: foundTour.nameTour,
             userId,
-            userName: foundUser.name,
+            userName: foundUser.name, //
             initialDate,
             tickets,
             equipment,
             status,
             detail,
-            totalPrice 
+            totalPrice
         });
 
         return newPurchased;
 
     } catch (error) {
-        
-        return {error: error};
+
+        return { error: error };
     }
 
 

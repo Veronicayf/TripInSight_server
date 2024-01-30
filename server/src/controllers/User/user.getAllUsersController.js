@@ -1,8 +1,8 @@
 const { user } = require("../../sync/dbConnection")
 
-const getAllUsers = async(page, pageSize) => {
-        
-    if(parseInt(page) <= 0 ) {
+const getAllUsers = async (page, pageSize) => {
+
+    if (parseInt(page) <= 0) {
         return ({
             errors: {
                 page: {
@@ -16,7 +16,7 @@ const getAllUsers = async(page, pageSize) => {
         })
     }
 
-    if(parseInt(pageSize) <= 0 ) {
+    if (parseInt(pageSize) <= 0) {
         return ({
             errors: {
                 page: {
@@ -32,18 +32,19 @@ const getAllUsers = async(page, pageSize) => {
 
     const offset = (page - 1) * pageSize;
 
-    try{
-        
+    try {
+
         const users = await user.findAll({
-    
+
             limit: parseInt(pageSize),
             offset: parseInt(offset)
-    
+
         });
-    
+
         return users;
         
     } catch(error) {
+
 
         throw error;
 
