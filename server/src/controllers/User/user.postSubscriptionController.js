@@ -3,7 +3,7 @@ const { user } = require('../../sync/dbConnection');
 
 const subscriptionEmailController = async (email) => {
     try {
-        await subscriptionEmail(email, 'No estás suscrito');
+        await subscriptionEmail(email, 'gracias por suscribirte');
     } catch (error) {
         throw error;
     }
