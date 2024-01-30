@@ -4,6 +4,7 @@ const { check } = require('express-validator');
 const { purchasedPostHandler } = require('../../handlers/purchased.Handler/purchased.postHandler');
 const { getPurchasedByIdHandler } = require('../../handlers/purchased.Handler/purchasedGetByIdHandler');
 const { getAllPurchasedHandler } = require('../../handlers/purchased.Handler/purchased.getAllHandler');
+const { getAllUserPurchasedsHandler } = require('../../handlers/purchased.Handler/purchased.getAllUserPurchaseds');
 
 const purchasedRouter =  Router();
 
@@ -28,6 +29,13 @@ purchasedRouter.get('/getpurchased/:id',
     getPurchasedByIdHandler
 );
 
-purchasedRouter.get('/all', getAllPurchasedHandler)
+purchasedRouter.get('/all', getAllPurchasedHandler);
+
+purchasedRouter.get('/getuserpurchaseds/:id',
+    [
+        check('id','id has to be a uuid format').isUUID(),
+    ], 
+    getAllUserPurchasedsHandler
+);
 
 module.exports = purchasedRouter;
