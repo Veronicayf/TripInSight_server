@@ -2,9 +2,9 @@ const { purchasedPostController } = require("../../controllers/purchased/purchas
 const { validationResult } = require('express-validator');
 
 
-const purchasedPostHandler = async(req, res) => {
+const purchasedPostHandler = async (req, res) => {
 
-    const {tourId, userId, initialDate, tickets, equipment, status, detail, totalPrice} = req.body;
+    const { tourId, userId, initialDate, tickets, equipment, status, detail, totalPrice } = req.body;
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -17,9 +17,9 @@ const purchasedPostHandler = async(req, res) => {
     try {
 
         const response = await purchasedPostController(tourId, userId, initialDate, tickets, equipment, status, detail, totalPrice);
+        if (response.error) throw response;
 
-        if(response.error) throw response;
-        
+        //manejar aqui el email!!!!
         res.json(response);
 
     } catch (error) {
