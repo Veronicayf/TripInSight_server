@@ -10,11 +10,7 @@ const { getAllFavsHandler } = require('../../handlers/user.Handler/user.getAllFa
 const { addFavoriteHandler } = require('../../handlers/user.Handler/user.addfavoriteHandler');
 const { deleteFavoriteHandler } = require('../../handlers/user.Handler/user.deletefavoriteHandler');
 
-const { addPurchasedHandler } = require('../../handlers/user.Handler/user.purchasedHandler');
 const { subscriptionHandler } = require('../../handlers/user.Handler/user.postSubscription');
-// const { user } = require('../../sync/dbConnection');
-// const { addPurchasedHandler } = require('../../handlers/user.Handler/user.addPurchasedHandler');
-
 
 //* Raul.
 const userRouter = Router();
@@ -73,15 +69,6 @@ userRouter.put("/addfavorite",
 );
 userRouter.delete('/deletefavoritetour', deleteFavoriteHandler);
 
-
-userRouter.put('/addpurchased',
-    [
-        check('tourId', 'idTour must be an uuid format').isUUID(),
-        check('userId', 'userId must be an uuid format').isUUID()
-    ],
-    addPurchasedHandler
-);
-
 userRouter.get("/getuser/:id",
 
 
@@ -92,23 +79,12 @@ userRouter.get("/getuser/:id",
 );
 
 
-userRouter.put("/",
-    [
-        check('id', 'id must be UUID format').isUUID(),
-    ],
-    putUserHandler
-);
-
-
 userRouter.delete("/:id",
     [
         check('id', 'id must be UUID format').isUUID()
     ],
     deleteUserHandler
 );
-
-
-userRouter.post("/postpurchased", addPurchasedHandler);
 
 
 module.exports = userRouter;
