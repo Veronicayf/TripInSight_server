@@ -2,7 +2,6 @@ const { Router } = require('express');
 const { check } = require('express-validator');
 
 const { postUserHandler } = require('../../handlers/user.Handler/user.postHandler');
-const { putUserHandler } = require('../../handlers/user.Handler/user.putHandler');
 const { getUserHandler } = require('../../handlers/user.Handler/user.getHandler');
 const { deleteUserHandler } = require('../../handlers/user.Handler/user.deleteHandler');
 const { getAllUsersHandler } = require('../../handlers/user.Handler/user.getAllUsersHandler');
@@ -10,6 +9,7 @@ const { updateUserHandler } = require('../../handlers/user.Handler/user.updateUs
 const { getAllFavsHandler } = require('../../handlers/user.Handler/user.getAllFavsHandler');
 const { addFavoriteHandler } = require('../../handlers/user.Handler/user.addfavoriteHandler');
 const { deleteFavoriteHandler } = require('../../handlers/user.Handler/user.deletefavoriteHandler');
+
 const { addPurchasedHandler } = require('../../handlers/user.Handler/user.purchasedHandler');
 const { subscriptionHandler } = require('../../handlers/user.Handler/user.postSubscription');
 // const { user } = require('../../sync/dbConnection');
@@ -54,9 +54,11 @@ userRouter.put('/updateuser',
         check('birthDate', 'birthDate should be a date').optional().isISO8601(),
 
         check('phoneNumber', 'Phone number must be string').optional().isString(),
+
+        check('image', 'image must be an url').isURL().optional()
     ],
     updateUserHandler
-)
+);
 
 userRouter.get("/all", getAllUsersHandler);
 
@@ -82,11 +84,13 @@ userRouter.put('/addpurchased',
 
 userRouter.get("/getuser/:id",
 
+
     [
         check('id', 'id must be UUID format').isUUID(),
     ],
     getUserHandler
 );
+
 
 userRouter.put("/",
     [
@@ -102,6 +106,7 @@ userRouter.delete("/:id",
     ],
     deleteUserHandler
 );
+
 
 userRouter.post("/postpurchased", addPurchasedHandler);
 

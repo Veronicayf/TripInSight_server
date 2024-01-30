@@ -1,3 +1,4 @@
+
 const { purchasedPostController } = require("../../controllers/purchased/purchased.postController");
 const { validationResult } = require('express-validator');
 const { purchasedEmail } = require('../../../../nodemailer/sendEmail')
@@ -20,14 +21,16 @@ const purchasedPostHandler = async (req, res) => {
         const response = await purchasedPostController(tourId, userId, initialDate, tickets, equipment, status, detail, totalPrice);
         if (response.error) throw response;
 
+                
         //manejar aqui el email!!!!
 
         await purchasedEmail(userId, initialDate, tickets, equipment, totalPrice)
+
         return res.json(response);
 
     } catch (error) {
 
-        res.status(400).json(error);
+        return res.status(400).json(error);
 
     }
 
