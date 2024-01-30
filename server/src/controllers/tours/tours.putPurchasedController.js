@@ -28,8 +28,9 @@ const purchasedTour = async (tourId, stock) => {
             }
         }
 
-        // foundTour.capacity -= stock;
+        foundTour.places -= stock;
         foundTour.subscription += stock;
+
         await foundTour.save();
         // return foundTour;
         const response = {
