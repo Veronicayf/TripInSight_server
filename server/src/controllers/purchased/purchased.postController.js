@@ -1,6 +1,9 @@
 const { user, tour, purchased } = require("../../sync/dbConnection");
+const { purchasedTour } = require("../tours/tours.putPurchasedController");
 
 const purchasedPostController = async (tourId, userId, initialDate, tickets, equipment, status, detail, totalPrice) => {
+
+    tickets = parseInt(tickets);
 
     try {
 
@@ -15,6 +18,18 @@ const purchasedPostController = async (tourId, userId, initialDate, tickets, equ
         if (!foundTour) {
             throw `Any tour have id: ${tourId}`
         }
+        
+        const aux = foundTour.subscription + tickets;
+
+        if (aux > foundTour.capacity) {
+            throw {
+                msg: 'No available spots'
+            }
+        }
+
+        foundTour.places -= tickets;
+        foundTour.subscription += tickets;
+        foundTour.save();
 
         const newPurchased = await purchased.create({
             tourId,
