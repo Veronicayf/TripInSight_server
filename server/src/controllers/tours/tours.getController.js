@@ -1,5 +1,6 @@
 const moment = require('moment');
-const { tour,  Op } = require('../../sync/dbConnection');
+const { tour } = require('../../sync/dbConnection');
+const { Op } = require('sequelize');
 
 const getAllTours = async (page, pageSize) => {
   const offset = (page - 1) * pageSize;
