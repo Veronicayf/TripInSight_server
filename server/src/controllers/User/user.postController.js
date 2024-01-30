@@ -9,13 +9,13 @@ const postUser = async (auth0Id, name, nationality, image, birthDate, email, adm
 
 		admin = !admin ? admin = false : admin = true;
 
-		const foundUser = await user.findOne({where: {email: email}});
+		const foundUser = await user.findOne({ where: { email: email } });
 
-		if(foundUser) {
+		if (foundUser) {
 			return (foundUser);
 		}
 
-		if (name && image && email ) {
+		if (name && image && email) {
 
 			if (auth0Id) { //Registra un usuario que venga de google.
 
@@ -27,13 +27,13 @@ const postUser = async (auth0Id, name, nationality, image, birthDate, email, adm
 						email: email,
 						image: image,
 					}
-				});		
+				});
 
-				await sendEmailFunction(email);
+				await sendEmailFunction(email, name);
 				return search;
 			}
-			
-			const newUser = user.create({				
+
+			const newUser = user.create({
 
 				name: name,
 				email: email,
@@ -41,11 +41,11 @@ const postUser = async (auth0Id, name, nationality, image, birthDate, email, adm
 				nationality,
 				birthDate,
 				phoneNumber,
-				admin: admin			
+				admin: admin
 			});
 
-			await sendEmailFunction(email);
-		
+			await sendEmailFunction(email, name);
+
 			return newUser;
 		}
 
