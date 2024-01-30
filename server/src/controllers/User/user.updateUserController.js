@@ -28,14 +28,13 @@ const updateUserController = async (nationality, birthDate, phoneNumber, admin, 
             findUser.nationality = nationality;
             findUser.admin = admin;
             findUser.isBanned = isBanned;
-            findUser.image = image;
+            findUser.image = image,
             await findUser.save();
                         
             return findUser;
         }
 
-    } catch(error) {  
-        
+    } catch(error) {          
         return {error: error}
     }
 

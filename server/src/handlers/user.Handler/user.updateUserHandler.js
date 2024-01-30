@@ -11,7 +11,7 @@ const updateUserHandler = async(req, res) => {
 
         return res.json(updatedUser);
     } catch(error) {
-        return res.status(500).json(error);
+        return res.status(400).json(error);
     }
        
 }

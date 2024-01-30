@@ -3,6 +3,7 @@ const { check } = require('express-validator');
 
 const { purchasedPostHandler } = require('../../handlers/purchased.Handler/purchased.postHandler');
 const { getPurchasedByIdHandler } = require('../../handlers/purchased.Handler/purchasedGetByIdHandler');
+const { getAllPurchasedHandler } = require('../../handlers/purchased.Handler/purchased.getAllHandler');
 
 const purchasedRouter =  Router();
 
@@ -26,5 +27,7 @@ purchasedRouter.get('/getpurchased/:id',
     ],
     getPurchasedByIdHandler
 );
+
+purchasedRouter.get('/all', getAllPurchasedHandler)
 
 module.exports = purchasedRouter;

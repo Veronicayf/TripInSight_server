@@ -6,6 +6,8 @@ const postTours = async (tourData) => {
   console.log(tourData.initialDate)
 
   try {
+    tourData.places = tourData.capacity;
+
 
     const currentDate = moment().startOf('day');
     const tourInitialDate = moment(tourData.initialDate).startOf('day');

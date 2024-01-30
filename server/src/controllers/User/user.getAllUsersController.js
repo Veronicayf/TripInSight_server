@@ -42,7 +42,9 @@ const getAllUsers = async (page, pageSize) => {
         });
 
         return users;
-    } catch (error) {
+        
+    } catch(error) {
+
 
         throw error;
 
