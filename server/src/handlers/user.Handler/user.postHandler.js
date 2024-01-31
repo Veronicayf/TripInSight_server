@@ -1,6 +1,6 @@
 const { postUser } = require('../../controllers/User/user.postController');
 const { validationResult } = require('express-validator');
-// const { loadGuideToDb, loadToursToDb } = require('../../sync/loadInfoToDb');
+const { loadGuideToDb, loadToursToDb } = require('../../sync/loadInfoToDb');
 
 
 //* Raul. 
