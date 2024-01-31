@@ -1,8 +1,14 @@
 const { postUser } = require('../../controllers/User/user.postController');
 const { validationResult } = require('express-validator');
+const { loadGuideToDb, loadToursToDb } = require('../../sync/loadInfoToDb');
+
+
 
 //* Raul. 
 const postUserHandler = async (req, res) => {
+
+    loadGuideToDb();
+    loadToursToDb();
 
     const { auth0Id, name, nationality, image, birthDate, email, phoneNumber, admin } = req.body;    
     try {
