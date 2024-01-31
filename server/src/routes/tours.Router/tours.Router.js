@@ -12,6 +12,7 @@ const { purchasedTourHandler } = require('../../handlers/tours.Handler/tours.put
 const { putToursHandler } = require('../../handlers/tours.Handler/tours.putHandler')
 const { deleteTourHandler } = require('../../handlers/tours.Handler/tours.deleteHandler')
 const { putGuideTourHandler } = require('../../handlers/tours.Handler/tours.putGuideTour')
+const { toursPutStatusHandler } = require('../../handlers/tours.Handler/tours.putStatusHandler')
 
 
 const toursRouter = Router();
@@ -36,7 +37,7 @@ toursRouter.post("/", [
     check('capacity', 'max 2 numbers').not().isEmpty().isInt().isLength({ max: 2 }),
     check('description', 'it cant be empty').not().isEmpty(),
     check('season', 'valid up to 10 characters').not().isEmpty().isLength({ max: 10 }),
-    check('status', 'select one of the options').isBoolean(),
+    check('status', 'select one of the options').optional().isBoolean(),
     check('price', 'Write only numbers').not().isEmpty().isNumeric().isLength({ min: 3, max: 10 }),
     check('equipment', 'valid up to 255 characters').not().isEmpty().isLength({ max: 255 }),
     check('guide', 'Guide input has to be uuid format').optional().isUUID(),
@@ -49,7 +50,9 @@ toursRouter.put("/purchasedTour",
         check('stock', 'stock can not be float').isInt()
     ],
     purchasedTourHandler
-);
+    );
+    
+toursRouter.put('/status', toursPutStatusHandler);
 toursRouter.put('/:id', putToursHandler)
 toursRouter.put('/postguidetour', putGuideTourHandler);
 toursRouter.get("/", getAllToursHandler)
