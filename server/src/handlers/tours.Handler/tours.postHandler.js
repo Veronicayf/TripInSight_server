@@ -6,7 +6,7 @@ const postToursHandler = async (req, res) => {
     const tourData = req.body;
 
     try {
-        const requiredFields = ['nameTour', 'initialDate', 'endDate', 'image', 'country', 'city', 'continent', 'type', 'capacity', 'description', 'season', 'status', 'price', 'equipment'];
+        const requiredFields = ['nameTour', 'initialDate', 'endDate', 'image', 'country', 'city', 'continent', 'type', 'capacity', 'description', 'season', 'price', 'equipment'];
         const missingData = requiredFields.filter(field => !(field in tourData));
 
         if (missingData.length > 0) {
