@@ -47,6 +47,10 @@ module.exports = (sequelize) => {
         comprados: {
             type: DataTypes.UUID,
             allowNull: true,
+        },
+        subscribed: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
         }
     }, { timestamps: false });
 }
