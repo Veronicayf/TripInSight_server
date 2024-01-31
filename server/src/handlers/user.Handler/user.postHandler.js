@@ -5,10 +5,7 @@ const { loadGuideToDb, loadToursToDb } = require('../../sync/loadInfoToDb');
 
 
 //* Raul. 
-const postUserHandler = async (req, res) => {
-
-    // loadGuideToDb();
-    // loadToursToDb();
+const postUserHandler = async (req, res) => {    
 
     const { auth0Id, name, nationality, image, birthDate, email, phoneNumber, admin } = req.body;    
     try {
