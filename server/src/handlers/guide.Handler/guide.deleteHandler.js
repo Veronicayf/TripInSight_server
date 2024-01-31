@@ -4,7 +4,7 @@ const { validationResult } = require('express-validator')
 const deleteGuideHandler = async (req, res) => {
 
     const { id } = req.params
-
+    
     const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({
