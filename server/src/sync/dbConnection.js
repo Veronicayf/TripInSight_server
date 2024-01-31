@@ -14,19 +14,19 @@ const reviewsModel = require('../models/reviews/reviews')
 // });
 
 //? Para uso de mi base de datos local
-// const sequelize = new Sequelize('tripinsight', 'root', 'hola1234', {
-//     host: 'localhost',
-//     dialect: 'mysql',
-//     logging: false,
-// });
-
-
-//? base de datos local con variables en el .env
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
-    host: process.env.DB_HOST,
+const sequelize = new Sequelize('tripinsight', 'root', 'hola1234', {
+    host: 'localhost',
     dialect: 'mysql',
     logging: false,
 });
+
+
+//? base de datos local con variables en el .env
+// const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+//     host: process.env.DB_HOST,
+//     dialect: 'mysql',
+//     logging: false,
+// });
 
 guideModel(sequelize);
 tourModel(sequelize);
@@ -48,11 +48,11 @@ tour.belongsToMany(guide, { through: 'guide_tours', timestamps: false });
 user.belongsToMany(tour, { through: 'favorites_tours', timestamps: false });
 tour.belongsToMany(user, { through: 'favorites_tours', timestamps: false });
 
-purchased.belongsTo(tour, {foreignKey: 'tourId'});
-purchased.belongsTo(user, {foreignKey: 'userId'});
+purchased.belongsTo(tour, { foreignKey: 'tourId' });
+purchased.belongsTo(user, { foreignKey: 'userId' });
 
-reviews.belongsTo(user, {foreignKey: 'userId'});
-reviews.belongsTo(tour, {foreignKey: 'tourId'});
+reviews.belongsTo(user, { foreignKey: 'userId' });
+reviews.belongsTo(tour, { foreignKey: 'tourId' });
 
 
 const { models } = sequelize;
