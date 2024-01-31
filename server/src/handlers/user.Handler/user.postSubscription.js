@@ -21,13 +21,7 @@ const subscriptionHandler = async (req, res) => {
                 message: 'you must log in first.'
             });
         }
-
-        if (existingUser) {
-            return res.status(200).json({
-                ok: true,
-                message: 'This email is already subscribed.'
-            });
-        } else {
+        else {
             await subscriptionEmailController(email);
             return res.status(200).json({
                 ok: true,

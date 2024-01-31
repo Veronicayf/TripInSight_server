@@ -1,7 +1,6 @@
 const { postUser } = require('../../controllers/User/user.postController');
 const { validationResult } = require('express-validator');
-const { loadGuideToDb, loadToursToDb } = require('../../sync/loadInfoToDb');
-
+// const { loadGuideToDb, loadToursToDb } = require('../../sync/loadInfoToDb');
 
 
 //* Raul. 
@@ -10,7 +9,7 @@ const postUserHandler = async (req, res) => {
     // loadGuideToDb();
     // loadToursToDb();
 
-    const { auth0Id, name, nationality, image, birthDate, email, phoneNumber, admin } = req.body;    
+    const { auth0Id, name, nationality, image, birthDate, email, phoneNumber, admin } = req.body;
     try {
 
         const errors = validationResult(req);
@@ -23,8 +22,8 @@ const postUserHandler = async (req, res) => {
 
         const newUser = await postUser(auth0Id, name, nationality, image, birthDate, email, admin, phoneNumber);
 
-        if(newUser.error) throw newUser.error;
-        
+        if (newUser.error) throw newUser.error;
+
         return res.status(201).json(newUser);
 
     } catch (error) {

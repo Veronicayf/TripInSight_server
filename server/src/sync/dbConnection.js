@@ -48,11 +48,11 @@ tour.belongsToMany(guide, { through: 'guide_tours', timestamps: false });
 user.belongsToMany(tour, { through: 'favorites_tours', timestamps: false });
 tour.belongsToMany(user, { through: 'favorites_tours', timestamps: false });
 
-purchased.belongsTo(tour, {foreignKey: 'tourId'});
-purchased.belongsTo(user, {foreignKey: 'userId'});
+purchased.belongsTo(tour, { foreignKey: 'tourId' });
+purchased.belongsTo(user, { foreignKey: 'userId' });
 
-reviews.belongsTo(user, {foreignKey: 'userId'});
-reviews.belongsTo(tour, {foreignKey: 'tourId'});
+reviews.belongsTo(user, { foreignKey: 'userId' });
+reviews.belongsTo(tour, { foreignKey: 'tourId' });
 
 
 const { models } = sequelize;

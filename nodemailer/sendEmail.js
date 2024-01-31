@@ -40,7 +40,7 @@ const subscriptionEmail = async (email) => {
         from: process.env.SMTP_USER,
         to: email,
         subject: "Thank You for Subscribing!",
-        text: "Thank you for subscribing to our newsletter! We're excited to share our latest updates and offers with you. Welcome to the Trip in Sight Tours community!"
+        html: "Thank you for subscribing to our newsletter! We're excited to share our latest updates and offers with you. \n\n Welcome to the Trip in Sight Tours community!"
     };
 
     await transporter.sendMail(message);
