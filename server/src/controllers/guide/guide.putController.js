@@ -1,13 +1,12 @@
 const { guide } = require("../../sync/dbConnection");
 
-const putGuide = async (id, forename, surname, nationality, image, birthDate, biography) => {    
+const putGuide = async(id, forename, surname, nationality, image, birthDate, biography) => {    
 
     try{
 
-        const findGuide = await guide.findByPk(id);            
-    
+        const findGuide = await guide.findByPk(id);       
+        
         if(!findGuide) {
-            
             return ({
                 error: {
                     id: {
@@ -31,25 +30,12 @@ const putGuide = async (id, forename, surname, nationality, image, birthDate, bi
             findGuide.biography = biography;
            
             await findGuide.save();        
-            return findUser;
+            return findGuide;
         }
 
-    } catch(error) {        
-        return (
-            {
-                error: {
-                    id: {
-                        type: "field",
-                        value: "db",
-                        msg: error,
-                        path: "id",
-                        location: "db"
-                    }
-                }
-            }
-        )
+    } catch(error) {          
+        return {error: error}
     }
-
 }
 
 module.exports = {
