@@ -5,7 +5,7 @@ require('dotenv').config();
 
 
 
-conn.sync({ force: true }).then(() => {  //true=borra todo
+conn.sync({ force: false }).then(() => {  //true=borra todo
 
 
     server.listen(process.env.PORT, () => {
