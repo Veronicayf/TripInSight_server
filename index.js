@@ -8,8 +8,8 @@ require('dotenv').config();
 conn.sync({ force: true }).then(() => {  //true=borra todo
 
 
-    server.listen(process.env.DBPORT, () => {
-        console.log(`Sevidor corriendo en puerto: ${process.env.DBPORT}`);
+    server.listen(process.env.PORT, () => {
+        console.log(`Sevidor corriendo en puerto: ${process.env.PORT}`);
     });
 
 });
