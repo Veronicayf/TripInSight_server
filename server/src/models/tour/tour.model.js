@@ -1,4 +1,4 @@
-const { DataTypes } = require('sequelize')
+const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
     sequelize.define('tour', {
@@ -24,6 +24,10 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: true,
         },
+        continent: {
+            type: DataTypes.STRING,
+            allowNull: true
+        },
         country: {
             type: DataTypes.STRING,
             allowNull: false
@@ -40,6 +44,15 @@ module.exports = (sequelize) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
+        subscription: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            defaultValue: 0
+        },
+        places: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+        },
         description: {
             type: DataTypes.TEXT,
             allowNull: false
@@ -50,7 +63,8 @@ module.exports = (sequelize) => {
         },
         status: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            defaultValue: 'enabled'
         },
         price: {
             type: DataTypes.INTEGER,
@@ -60,6 +74,20 @@ module.exports = (sequelize) => {
             type: DataTypes.TEXT,
             allowNull: false
         },
-        //Agregar rating- 1...5
+        tags: { //se agrego nueva propiedad
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        photos: {
+            type: DataTypes.JSON,
+            allowNull: false
+        }, 
+        guideId: {
+            type: DataTypes.UUID,
+            references: {
+                model: 'guides',
+                key: 'id'
+            }
+        }
     }, { timestamps: false });
 }

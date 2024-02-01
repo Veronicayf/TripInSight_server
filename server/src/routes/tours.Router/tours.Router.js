@@ -1,29 +1,31 @@
 const { Router } = require('express')
-const { postToursHandler } = require('../../handlers/tours.Handler/tours.postHandler')
 const { check } = require('express-validator')
 
-const { getToursHandler, getAllToursHandler } = require('../../handlers/tours.Handler/tours.getHandler')
-// const { getToursByNameHandler } = require()
-// const { getToursByTypeHandler } = require()
-// const { getToursByPriceHandler } = require()
-// const { getToursByGuideHandler } = require()
-// const { getToursByCountryHandler } = require()
+
+const { postToursHandler } = require('../../handlers/tours.Handler/tours.postHandler')
+const { getAllToursHandler } = require('../../handlers/tours.Handler/tours.getHandler')
+const { getToursHandler } = require('../../handlers/tours.Handler/tours.getByIdHandler')
+const { getToursByNameHandler } = require('../../handlers/tours.Handler/tours.getByNameHandler')
+const { getContinentHandler } = require('../../handlers/tours.Handler/tours.getByContinentHandler')
+const { tagsHandler } = require('../../handlers/tours.Handler/tours.getTagsHandler')
+const { purchasedTourHandler } = require('../../handlers/tours.Handler/tours.putPurchasedHandler')
 const { putToursHandler } = require('../../handlers/tours.Handler/tours.putHandler')
-const { deleteToursHandler } = require('../../handlers/tours.Handler/tours.deleteHandler')
+const { deleteTourHandler } = require('../../handlers/tours.Handler/tours.deleteHandler')
+const { putGuideTourHandler } = require('../../handlers/tours.Handler/tours.putGuideTour')
+const { toursPutStatusHandler } = require('../../handlers/tours.Handler/tours.putStatusHandler')
+
 
 const toursRouter = Router();
 
-// const formatDates = (req, res, next) => {
-//     const { initialDate, endDate } = req.body;
+toursRouter.get("/tags", tagsHandler)
+toursRouter.get("/continent", getContinentHandler)
+toursRouter.get("/nameTour", getToursByNameHandler)
+toursRouter.get("/:id", getToursHandler)
+toursRouter.get("/", getAllToursHandler)
 
-//     // Verificar si las fechas tienen la hora y ajustarlas si es necesario
-//     req.body.formattedInitialDate = initialDate.includes('T') ? initialDate.split('T')[0] : initialDate;
-//     req.body.formattedEndDate = endDate.includes('T') ? endDate.split('T')[0] : endDate;
-
-//     next();
-// };
 
 toursRouter.post("/", [
+
     check('nameTour', 'valid up to 50 characters').not().isEmpty().isString().isLength({ max: 50 }),
     check('initialDate', 'write a correct format (yyyy-mm-dd)').isISO8601(),
     check('endDate', 'write a correct format (yyyy-mm-dd)').isISO8601(),
@@ -33,56 +35,29 @@ toursRouter.post("/", [
     check('type', 'valid up to 20 characters').not().isEmpty().isLength({ max: 20 }),
     check('capacity', 'characters is not a number').not().isEmpty().isNumeric(),
     check('capacity', 'max 2 numbers').not().isEmpty().isInt().isLength({ max: 2 }),
-    check('description', 'valid up to 255 characters').not().isEmpty().isLength({ max: 255 }),
+    check('description', 'it cant be empty').not().isEmpty(),
     check('season', 'valid up to 10 characters').not().isEmpty().isLength({ max: 10 }),
-    check('status', 'select one of the options').isBoolean(),
+    check('status', 'select one of the options').optional().isBoolean(),
     check('price', 'Write only numbers').not().isEmpty().isNumeric().isLength({ min: 3, max: 10 }),
     check('equipment', 'valid up to 255 characters').not().isEmpty().isLength({ max: 255 }),
-    // formatDates,  // Middleware para formatear las fechas antes de la validación
-], postToursHandler);
+    check('guide', 'Guide input has to be uuid format').optional().isUUID(),
+], postToursHandler)
 
-
-
-
-
-
-// toursRouter.post("/", [
-
-//     check('nameTour', 'valid up to 50 characters').not().isEmpty().isString().isLength({ max: 50 }),
-
-//     check('initialDate', 'write a correct formate (yyyy-mm-dd)').isISO8601(),
-//     check('endDate', 'write a correct formate (yyyy-mm-dd)').isISO8601(),
-
-//     check('image', 'Invalidate URL').isURL(),
-//     check('country', 'valid up to 20 characters').not().isEmpty().isLength({ max: 20 }),
-//     check('city', 'valid up to 20 charactere').not().isEmpty().isLength({ max: 20 }),
-//     check('type', 'valid up to 20 character').not().isEmpty().isLength({ max: 20 }), //paisajes, animales, fotografia, safari.
-
-//     check('capacity', 'characters is not a number').not().isEmpty().isNumeric(),
-//     check('capacity', 'max 2 numbers').not().isEmpty().isInt().isLength({ max: 2 }),
-
-
-//     check('description', 'valid up to 255 characters').not().isEmpty().isLength({ max: 255 }),
-//     check('season', 'valid up to 10 characters').not().isEmpty().isLength({ max: 10 }), //summer, winter, spring, fall.
-
-//     //!VERIFICAR CON LOS CHICOS________________________
-//     check('status', 'select one of the options').isBoolean(), //true=Activo ó false=Inactivo
-
-//     check('price', 'Write only numbers').not().isEmpty().isNumeric().isLength({ min: 3, max: 10 }),
-//     check('equipment', 'valid up to 255 characters').not().isEmpty().isLength({ max: 255 }),
-// ],
-//     postToursHandler)
-
-
-toursRouter.get("/:id", getToursHandler)// AGREGAR CHECK UUID
+toursRouter.put("/purchasedTour",
+    [
+        check('tourId', 'tourId has to be a UUID format').isUUID(),
+        check('stock', 'stock has to be a number').isNumeric(),
+        check('stock', 'stock can not be float').isInt()
+    ],
+    purchasedTourHandler
+    );
+    
+toursRouter.put('/status', toursPutStatusHandler);
+toursRouter.put('/:id', putToursHandler)
+toursRouter.put('/postguidetour', putGuideTourHandler);
 toursRouter.get("/", getAllToursHandler)
-
-// toursRouter.get("/", getToursByNameHandler) //coincidencias
-// toursRouter.get("/", getToursByTypeHandler)
-// toursRouter.get("/", getToursByPriceHandler)
-// toursRouter.get("/", getToursByCountryHandler) //filtro por paises
-// toursRouter.get("/", getToursByGuideHandler)
-toursRouter.put("/", putToursHandler)
-toursRouter.delete("/:id", deleteToursHandler)
+toursRouter.get("/nameTour", getToursByNameHandler)
+toursRouter.get("/:id", getToursHandler)
+toursRouter.delete("/:id", deleteTourHandler)
 
 module.exports = toursRouter
