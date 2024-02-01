@@ -3,6 +3,7 @@ const { updateUserController } = require("../../controllers/User/user.updateUser
 const updateUserHandler = async(req, res) => {
 
     const {nationality, birthDate, phoneNumber, admin, isBanned, idUser, image} = req.body;
+    
 
     try {
         const updatedUser = await updateUserController(nationality, birthDate, phoneNumber, admin, isBanned, idUser, image)

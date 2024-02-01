@@ -9,7 +9,7 @@ const postUserHandler = async (req, res) => {
 
     const { auth0Id, name, nationality, image, birthDate, email, phoneNumber, admin } = req.body;    
     try {
-
+                
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({

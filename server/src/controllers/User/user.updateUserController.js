@@ -1,7 +1,9 @@
 const { user } = require("../../sync/dbConnection");
 
 const updateUserController = async (nationality, birthDate, phoneNumber, admin, isBanned, idUser, image) => {    
-
+    
+    // conosle.log(nationality, birthDate, phoneNumber, admin, isBanned, idUser, image);
+    console.log(image);
     try{
         
         const findUser = await user.findByPk(idUser);            
@@ -20,9 +22,8 @@ const updateUserController = async (nationality, birthDate, phoneNumber, admin, 
                 }
             });
             
-    
         } else {
-
+            
             findUser.birthDate = birthDate;
             findUser.phoneNumber = phoneNumber;
             findUser.nationality = nationality;
