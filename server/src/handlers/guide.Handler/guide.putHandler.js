@@ -6,9 +6,10 @@ const putGuideHandler = async (req, res) => {
 
     try {
         const updateGuide = await putGuide(id, forename, surname, nationality, image, birthDate, biography)
-        return res.json(updateGuide);
+        if(updateGuide.error) throw updateGuide;
+        return res.status(200).json(updateGuide);
     } catch(error) {
-        return res.status(404).json(error);
+        return res.status(400).json(error);
     }
        
 }
